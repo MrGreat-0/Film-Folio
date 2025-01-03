@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* primary - #1F1E24 */
+/* secondary - #6556CD */
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+::-moz-scrollbar {
+    width: 0px;
+}
+
+::-ms-scrollbar {
+    width: 0px;
+}
+
+::-o-scrollbar {
+    width: 0px;
+}
