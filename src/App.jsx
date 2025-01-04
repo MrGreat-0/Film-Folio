@@ -1,6 +1,6 @@
 import React from "react";
 import Routing from "./utils/Routing";
-import Nav from "./components/templates/Nav.jsx";
+import Nav from "./components/templates/Header/Nav";
 
 const App = () => {
   return (
