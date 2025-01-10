@@ -206,7 +206,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className="w-full h-[10vh] bg-zinc-900 relative px-2 flex items-center justify-between xl:justify-evenly text-white">
+    <nav className="w-full h-[10vh] bg-zinc-900 px-2 flex items-center justify-between xl:justify-evenly text-white sticky top-0 left-0 z-50">
       <div className="w-auto h-12 flex items-center relative">
         {/* nav-hamburger menu */}
         <div ref={dropdownMenuRef} className="menu md:hidden relative">
@@ -247,7 +247,7 @@ const Nav = () => {
         >
           <img
             className="w-full h-full object-contain"
-            src="/public/FilmFolio-full-logo.svg"
+            src="/FilmFolio-full-logo.svg"
             alt="logo"
           />
         </Link>

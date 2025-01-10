@@ -4,9 +4,9 @@ import Nav from "./components/templates/Header/Nav";
 
 const App = () => {
   return (
-    <main className="w-full h-screen bg-[#1F1E24]">
+    <main className="w-full h-full bg-[#1F1E24]">
       <Nav />
-      {/* <Routing /> */}
+      <Routing />
     </main>
   );
 };
