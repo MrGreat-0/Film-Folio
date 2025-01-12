@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Content from "./templates/Content";
+import ContentLoader from "./Loading/ContentLoader";
 
 const TvShow = () => {
   // for trending
@@ -134,27 +135,49 @@ const TvShow = () => {
   ];
   return (
     <div className="w-full min-h-screen relative">
-      <Content
-        title="trending"
-        switchData={switchData[0]}
-        setToggle={setDataToggle}
-        cardData={trending}
-        toggleSwitchCount={toggleSwitchCount}
-      />
+      {trendingLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content
+          title="trending"
+          switchData={switchData[0]}
+          setToggle={setDataToggle}
+          cardData={trending}
+          toggleSwitchCount={toggleSwitchCount}
+        />
+      )}
 
-      <Content
-        title="what's popular"
-        cardData={popular}
-        toggleSwitchCount={0}
-      />
+      {popularLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content
+          title="what's popular"
+          cardData={popular}
+          toggleSwitchCount={0}
+        />
+      )}
 
-      <Content title="top rated" cardData={topRated} toggleSwitchCount={0} />
-      <Content
-        title="airing today"
-        cardData={airingToaday}
-        toggleSwitchCount={0}
-      />
-      <Content title="on the air" cardData={onTheAir} toggleSwitchCount={0} />
+      {topRatedLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content title="top rated" cardData={topRated} toggleSwitchCount={0} />
+      )}
+
+      {airingToadayLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content
+          title="airing today"
+          cardData={airingToaday}
+          toggleSwitchCount={0}
+        />
+      )}
+
+      {onTheAirLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content title="on the air" cardData={onTheAir} toggleSwitchCount={0} />
+      )}
     </div>
   );
 };

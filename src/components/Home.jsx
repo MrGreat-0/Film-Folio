@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Poster from "./Poster";
 import Content from "./templates/Content";
+import PosterLoader from "./Loading/PosterLoader";
+import ContentLoader from "./Loading/ContentLoader";
 
 const Home = () => {
   // for poster
@@ -122,38 +124,44 @@ const Home = () => {
     { switchOne: "Movies", switchTwo: "TV Shows" },
   ];
 
-  return loading ? (
-    <div className="text-6xl text-zinc-100 text-center">Loading...</div>
-  ) : (
-    <>
-      <div className="w-full h-full pt-8">
-        <Poster poster={poster} />
-      </div>
-      <Content
-        title="trending"
-        switchData={switchData}
-        setToggleDayWeek={setTrendingToggleDayWeek}
-        setToggleMoviesTV={setTrendingToggleMoviesTV}
-        cardData={trending}
-        toggleSwitchCount={2}
-      />
-
-      <Content
-        title="what's popular"
-        switchData={switchData[1]}
-        setToggle={setPopularToggle}
-        cardData={popular}
-        toggleSwitchCount={toggleSwitchCount}
-      />
-
-      <Content
-        title="top rated"
-        switchData={switchData[1]}
-        setToggle={setTopRatedToggle}
-        cardData={topRated}
-        toggleSwitchCount={toggleSwitchCount}
-      />
-    </>
+  return (
+    <div className="w-full h-full pt-8">
+      {loading ? <PosterLoader /> : <Poster poster={poster} />}
+      {trendingLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content
+          title="trending"
+          switchData={switchData}
+          setToggleDayWeek={setTrendingToggleDayWeek}
+          setToggleMoviesTV={setTrendingToggleMoviesTV}
+          cardData={trending}
+          toggleSwitchCount={2}
+        />
+      )}
+      {popularLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content
+          title="what's popular"
+          switchData={switchData[1]}
+          setToggle={setPopularToggle}
+          cardData={popular}
+          toggleSwitchCount={toggleSwitchCount}
+        />
+      )}
+      {topRatedLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content
+          title="top rated"
+          switchData={switchData[1]}
+          setToggle={setTopRatedToggle}
+          cardData={topRated}
+          toggleSwitchCount={toggleSwitchCount}
+        />
+      )}
+    </div>
   );
 };
 

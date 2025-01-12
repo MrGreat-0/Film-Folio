@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import noimage from "/no-image.jpg";
+import SearchBarLoader from "../../Loading/SearchBarLoader";
 
 const SearchBar = ({ containerStyle, messageStyle, innerWidth }) => {
   // nav-search-input through onChange //
@@ -83,7 +84,18 @@ const SearchBar = ({ containerStyle, messageStyle, innerWidth }) => {
 
   // nav-search useEffect to call getSearches function //
   useEffect(() => {
-    getSearches();
+    if (!query.trim()) {
+      setSearches([]);
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    const timeoutId = setTimeout(() => {
+      getSearches();
+    }, 100);
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [query]);
 
   // add event listener for keydown and clicks outside of the search input and dropdown //
@@ -161,7 +173,7 @@ const SearchBar = ({ containerStyle, messageStyle, innerWidth }) => {
           className="search-dropDown w-full max-h-[40vh] absolute bg-neutral-900 top-10 right-0 overflow-y-auto rounded-b-md "
         >
           {loading ? (
-            <div className="text-center py-4">Loading...</div>
+            <SearchBarLoader />
           ) : (
             searches.map((s, i) => (
               <Link

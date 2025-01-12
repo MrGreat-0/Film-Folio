@@ -1,6 +1,8 @@
 import React from "react";
 import Content from "./Content";
 import InfiniteScroll from "react-infinite-scroll-component";
+import ContentLoader from "../Loading/ContentLoader";
+import ScrollLoader from "../Loading/ScrollLoader";
 
 const PageTemplate = ({
   title,
@@ -11,26 +13,33 @@ const PageTemplate = ({
   fetchData,
   hasMore,
   toggleSwitchCount,
+  loading,
 }) => {
   return (
     <div className="w-full min-h-screen relative">
-      <InfiniteScroll
-        dataLength={length}
-        next={fetchData}
-        hasMore={hasMore}
-        loader={<h4>Loading...</h4>} // Loader component
-        endMessage={
-          <p style={{ textAlign: "center" }}>You have seen it all!</p>
-        }
-      >
-        <Content
-          title={title}
-          switchData={switchData}
-          setToggle={setToggle}
-          cardData={cardData}
-          toggleSwitchCount={toggleSwitchCount}
-        />
-      </InfiniteScroll>
+      {loading ? (
+        <ContentLoader />
+      ) : (
+        <InfiniteScroll
+          dataLength={length}
+          next={fetchData}
+          hasMore={hasMore}
+          loader={<ScrollLoader />}
+          endMessage={
+            <p style={{ textAlign: "center", color: "#f4f4f5" }}>
+              You have seen it all!
+            </p>
+          }
+        >
+          <Content
+            title={title}
+            switchData={switchData}
+            setToggle={setToggle}
+            cardData={cardData}
+            toggleSwitchCount={toggleSwitchCount}
+          />
+        </InfiniteScroll>
+      )}
     </div>
   );
 };

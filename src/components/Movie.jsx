@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Content from "./templates/Content";
+import ContentLoader from "./Loading/ContentLoader";
 
 const Movie = () => {
   // for trending
@@ -10,7 +11,7 @@ const Movie = () => {
   // for top-rated
   const [topRated, setTopRated] = useState([]);
   // for upcoming
-  const [upcoming, setUpcoming] = useState([]);  
+  const [upcoming, setUpcoming] = useState([]);
   // for now-playing
   const [nowPlaying, setNowPlaying] = useState([]);
 
@@ -136,27 +137,47 @@ const Movie = () => {
   ];
   return (
     <div className="w-full min-h-screen relative">
-      <Content
-        title="trending"
-        switchData={switchData[0]}
-        setToggle={setDataToggle}
-        cardData={trending}
-        toggleSwitchCount={toggleSwitchCount}
-      />
+      {trendingLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content
+          title="trending"
+          switchData={switchData[0]}
+          setToggle={setDataToggle}
+          cardData={trending}
+          toggleSwitchCount={toggleSwitchCount}
+        />
+      )}
 
-      <Content
-        title="what's popular"
-        cardData={popular}
-        toggleSwitchCount={0}
-      />
+      {popularLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content
+          title="what's popular"
+          cardData={popular}
+          toggleSwitchCount={0}
+        />
+      )}
 
-      <Content title="top rated" cardData={topRated} toggleSwitchCount={0} />
-      <Content title="upcoming" cardData={upcoming} toggleSwitchCount={0} />
-      <Content
-        title="now playing"
-        cardData={nowPlaying}
-        toggleSwitchCount={0}
-      />
+      {topRatedLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content title="top rated" cardData={topRated} toggleSwitchCount={0} />
+      )}
+      {upcomingLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content title="upcoming" cardData={upcoming} toggleSwitchCount={0} />
+      )}
+      {nowPlayingLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content
+          title="now playing"
+          cardData={nowPlaying}
+          toggleSwitchCount={0}
+        />
+      )}
     </div>
   );
 };

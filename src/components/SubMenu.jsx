@@ -15,7 +15,7 @@ const SubMenu = () => {
   const [toggleSwitchCount, setToggleSwitchCount] = useState(1);
 
   // for loading
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // for infinite scroll
   const pageRef = useRef(1);
@@ -23,7 +23,6 @@ const SubMenu = () => {
 
   // data function to call api for data //
   const getData = useCallback(async () => {
-    setLoading(true);
     try {
       let endpoint = "";
       if (category === "movie") {
@@ -90,6 +89,7 @@ const SubMenu = () => {
       setHasMore(true);
       setData([]);
       getData();
+      setLoading(true);
     }
   };
 
@@ -113,6 +113,7 @@ const SubMenu = () => {
         fetchData={getData}
         hasMore={hasMore}
         toggleSwitchCount={type === "trending" ? toggleSwitchCount : undefined}
+        loading={loading}
       />
     </div>
   );
