@@ -1,4 +1,5 @@
 import React from "react";
+import noimage from "/no-image.jpg";
 
 const Card = ({ data }) => {
   return (
@@ -37,16 +38,16 @@ const Card = ({ data }) => {
           "Image"
         }
       />
-      <div className="w-full min-h-[10%] bg-zinc-700 text-zinc-300 font-semibold relative px-1 py-1 flex justify-between items-center">
-        <span className="bg-[#0184ba] text-xs sm:text-sm rounded-sm px-2 uppercase ">
+      <div className="w-full min-h-[10%] bg-[#18273a] text-zinc-300 font-semibold relative px-1 py-1 flex justify-between items-center">
+        <span className="bg-[#0184ba] text-xs xs:text-sm rounded-sm px-2 uppercase whitespace-nowrap">
           {data.original_language || "No Info."}
         </span>
-        <span className="uppercase text-xs sm:text-sm font-semibold">
+        <span className="uppercase text-xs sm:text-sm font-semibold whitespace-nowrap">
           {data.media_type || "No Info."}
         </span>
       </div>
-      <div className="w-full min-h-[10%] bg-zinc-800 grid place-items-center pl-2 py-2 relative">
-        <h3 className="line-clamp-2 text-sm text-zinc-200 font-semibold leading-tight">
+      <div className="w-full min-h-[10%] bg-[#0c1622] grid place-items-center pl-2 py-2 relative">
+        <h3 className="line-clamp-2 text-xs xs:text-sm text-zinc-200 font-semibold leading-tight">
           {data.name ||
             data.title ||
             data.original_name ||

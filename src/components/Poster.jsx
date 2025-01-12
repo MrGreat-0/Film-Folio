@@ -55,7 +55,7 @@ const Poster = ({ poster }) => {
           dynamicBullets: true, // Pagination with dynamic bullets
         }}
         autoplay={{
-          delay: 5000, // Time in ms between slides
+          delay: 10000, // Time in ms between slides
           disableOnInteraction: false, // Keep autoplay even when user interacts with the Swiper
         }}
         loop={true}

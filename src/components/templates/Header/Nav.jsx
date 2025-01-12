@@ -13,16 +13,16 @@ const Nav = () => {
   const movieNavigation = [
     { name: "Popular", endpoint: "/movie/popular" },
     { name: "Upcoming", endpoint: "/movie/upcoming" },
-    { name: "Top Rated", endpoint: "/movie/top_rated" },
-    { name: "Now Playing", endpoint: "/movie/now_playing" },
+    { name: "Top Rated", endpoint: "/movie/top-rated" },
+    { name: "Now Playing", endpoint: "/movie/now-playing" },
   ];
 
   // nav-options data for TV Shows //
   const tvShowNavigation = [
     { name: "Popular", endpoint: "/tv/popular" },
-    { name: "Airing Today", endpoint: "/tv/airing_today" },
-    { name: "Top Rated", endpoint: "/tv/top_rated" },
-    { name: "On The Air", endpoint: "/tv/on_the_air" },
+    { name: "Airing Today", endpoint: "/tv/airing-today" },
+    { name: "Top Rated", endpoint: "/tv/top-rated" },
+    { name: "On The Air", endpoint: "/tv/on-the-air" },
   ];
 
   // nav-options data for People //
@@ -80,7 +80,7 @@ const Nav = () => {
   }, []);
 
   // function for nav-options to provide structure and event listener like handleMouseOver, handleMouseOut, handleClick, handleClickOutside //
-  const OptionDropdown = ({ title, options, basePath }) => {
+  const OptionDropdown = ({ title, options }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -131,7 +131,7 @@ const Nav = () => {
                 <Link
                   key={i}
                   className="text-zinc-400 text-sm hover:bg-zinc-800 pl-3 pr-8 py-2"
-                  to={`${basePath}/${formatToSlug(option.name)}`}
+                  to={`${option.endpoint}`}
                 >
                   {option.name}
                 </Link>
@@ -144,7 +144,7 @@ const Nav = () => {
   };
 
   // function for nav-menu to provide structure and event listener like handleMouseOver, handleMouseOut, handleClick, handleClickOutside //
-  const MenuDropdown = ({ title, options, basePath }) => {
+  const MenuDropdown = ({ title, options }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
 
@@ -181,7 +181,7 @@ const Nav = () => {
                 <Link
                   key={i}
                   className="text-zinc-400 text-sm hover:bg-zinc-800 py-[2px]"
-                  to={`${basePath}/${formatToSlug(option.name)}`}
+                  to={`${option.endpoint}`}
                 >
                   {option.name}
                 </Link>
@@ -216,26 +216,10 @@ const Nav = () => {
           ></i>
           {isMenuOpen && (
             <div className="menu-wrapper absolute bg-zinc-950 top-11 left-0 h-auto w-28 pl-4 rounded-b-md">
-              <MenuDropdown
-                title="Movies"
-                options={movieNavigation}
-                basePath="/movies"
-              />
-              <MenuDropdown
-                title="TV Shows"
-                options={tvShowNavigation}
-                basePath="/tv"
-              />
-              <MenuDropdown
-                title="People"
-                options={peopleNavigation}
-                basePath="/people"
-              />
-              <MenuDropdown
-                title="More"
-                options={moreNavigation}
-                basePath="/more"
-              />
+              <MenuDropdown title="Movies" options={movieNavigation} />
+              <MenuDropdown title="TV Shows" options={tvShowNavigation} />
+              <MenuDropdown title="People" options={peopleNavigation} />
+              <MenuDropdown title="More" options={moreNavigation} />
             </div>
           )}
         </div>
@@ -263,29 +247,13 @@ const Nav = () => {
 
       {/* nav-options */}
       <div className="nav-options relative hidden md:flex md:gap-6 md:ml-auto lg:ml-0 lg:mr-auto xl:mr-0">
-        <OptionDropdown
-          title="Movies"
-          options={movieNavigation}
-          basePath="/movies"
-        />
-        <OptionDropdown
-          title="TV Shows"
-          options={tvShowNavigation}
-          basePath="/tv"
-        />
-        <OptionDropdown
-          title="People"
-          options={peopleNavigation}
-          basePath="/people"
-        />
-        <OptionDropdown
-          title="More"
-          options={moreNavigation}
-          basePath="/more"
-        />
+        <OptionDropdown title="Movies" options={movieNavigation} />
+        <OptionDropdown title="TV Shows" options={tvShowNavigation} />
+        <OptionDropdown title="People" options={peopleNavigation} />
+        <OptionDropdown title="More" options={moreNavigation} />
       </div>
 
-      {/* nav-sign in & search icon for responsive */}
+      {/* nav-sign in & search icon for mobile-responsive */}
       <div className="nav-right max-w-fit flex items-center relative">
         <div className="w-full relative" ref={barRef}>
           <i

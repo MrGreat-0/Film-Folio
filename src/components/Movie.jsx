@@ -1,56 +1,36 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Poster from "./Poster";
 import Content from "./templates/Content";
 
-const Home = () => {
-  // for poster
-  const [poster, setPoster] = useState([]);
+const Movie = () => {
   // for trending
   const [trending, setTrending] = useState([]);
   // for popular
   const [popular, setPopular] = useState([]);
   // for top-rated
   const [topRated, setTopRated] = useState([]);
+  // for upcoming
+  const [upcoming, setUpcoming] = useState([]);  
+  // for now-playing
+  const [nowPlaying, setNowPlaying] = useState([]);
 
   // Toggle states for each content section
-  const [trendingToggleDayWeek, setTrendingToggleDayWeek] = useState("day");
-  const [trendingToggleMoviesTV, setTrendingToggleMoviesTV] = useState("movie");
-  const [popularToggle, setPopularToggle] = useState("movie");
-  const [topRatedToggle, setTopRatedToggle] = useState("movie");
+  const [dataToggle, setDataToggle] = useState("day");
   const [toggleSwitchCount, setToggleSwitchCount] = useState(1);
 
   // for loading //
-  const [loading, setLoading] = useState(false);
   const [trendingLoading, setTrendingLoading] = useState(false);
   const [popularLoading, setPopularLoading] = useState(false);
   const [topRatedLoading, setTopRatedLoading] = useState(false);
-
-  // poster function to call api for poster //
-  const getPoster = async () => {
-    setLoading(true);
-    try {
-      const { data } = await axios.get("/api/tmdb/trending/all/day");
-      if (data && data.results) {
-        // console.log("Poster :- " , data.results.slice(0, 1));
-        setPoster(data.results.slice(0, 5));
-      } else {
-        setPoster([]);
-      }
-    } catch (error) {
-      console.log("Poster Error: ", error);
-      setPoster([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [upcomingLoading, setUpcomingLoading] = useState(false);
+  const [nowPlayingLoading, setNowPlayingLoading] = useState(false);
 
   // trending function to call api for trending //
   const getTrending = async () => {
     setTrendingLoading(true);
     try {
       const { data } = await axios.get(
-        `/api/tmdb/trending/${trendingToggleMoviesTV}/${trendingToggleDayWeek}`
+        `/api/tmdb/trending/movie/${dataToggle}`
       );
       if (data && data.results) {
         // console.log("Trending :- ", data.results.slice(0, 1));
@@ -70,10 +50,10 @@ const Home = () => {
   const getPopular = async () => {
     setPopularLoading(true);
     try {
-      const { data } = await axios.get(`/api/tmdb/${popularToggle}/popular`);
+      const { data } = await axios.get(`/api/tmdb/movie/popular`);
       if (data && data.results) {
         // console.log("Popular :- " , data.results.slice(0, 1));
-        setPopular(data.results.slice(0, 10));
+        setPopular(data.results.slice(0, 11));
       } else {
         setPopular([]);
       }
@@ -89,7 +69,7 @@ const Home = () => {
   const getTopRated = async () => {
     setTopRatedLoading(true);
     try {
-      const { data } = await axios.get(`/api/tmdb/${topRatedToggle}/top_rated`);
+      const { data } = await axios.get(`/api/tmdb/movie/top_rated`);
       if (data && data.results) {
         // console.log("Top-Rated :- ", data.results.slice(0, 1));
         setTopRated(data.results.slice(0, 12));
@@ -104,57 +84,81 @@ const Home = () => {
     }
   };
 
+  // upcoming function to call api for upcoming //
+  const getUpcoming = async () => {
+    setUpcomingLoading(true);
+    try {
+      const { data } = await axios.get(`/api/tmdb/movie/upcoming`);
+      if (data && data.results) {
+        // console.log("Top-Rated :- ", data.results.slice(0, 1));
+        setUpcoming(data.results.slice(0, 11));
+      } else {
+        setUpcoming([]);
+      }
+    } catch (error) {
+      console.log("Upcoming Error: ", error);
+      setUpcoming([]);
+    } finally {
+      setUpcomingLoading(false);
+    }
+  };
+
+  // now-playing function to call api for now-playing //
+  const getNowPlaying = async () => {
+    setNowPlayingLoading(true);
+    try {
+      const { data } = await axios.get(`/api/tmdb/movie/now_playing`);
+      if (data && data.results) {
+        // console.log("Top-Rated :- ", data.results.slice(0, 1));
+        setNowPlaying(data.results.slice(0, 13));
+      } else {
+        setNowPlaying([]);
+      }
+    } catch (error) {
+      console.log("Now-Playing Error: ", error);
+      setNowPlaying([]);
+    } finally {
+      setNowPlayingLoading(false);
+    }
+  };
+
   useEffect(() => {
-    !poster.length && getPoster();
     getTrending();
     getPopular();
     getTopRated();
-  }, [
-    poster,
-    trendingToggleDayWeek,
-    trendingToggleMoviesTV,
-    popularToggle,
-    topRatedToggle,
-  ]);
+    getUpcoming();
+    getNowPlaying();
+  }, [dataToggle]);
 
   const switchData = [
     { switchOne: "Today", switchTwo: "Week" },
     { switchOne: "Movies", switchTwo: "TV Shows" },
   ];
-
-  return loading ? (
-    <div className="text-6xl text-zinc-100 text-center">Loading...</div>
-  ) : (
-    <>
-      <div className="w-full h-full pt-8">
-        <Poster poster={poster} />
-      </div>
+  return (
+    <div className="w-full min-h-screen relative">
       <Content
         title="trending"
-        switchData={switchData}
-        setToggleDayWeek={setTrendingToggleDayWeek}
-        setToggleMoviesTV={setTrendingToggleMoviesTV}
+        switchData={switchData[0]}
+        setToggle={setDataToggle}
         cardData={trending}
-        toggleSwitchCount={2}
+        toggleSwitchCount={toggleSwitchCount}
       />
 
       <Content
         title="what's popular"
-        switchData={switchData[1]}
-        setToggle={setPopularToggle}
         cardData={popular}
-        toggleSwitchCount={toggleSwitchCount}
+        toggleSwitchCount={0}
       />
 
+      <Content title="top rated" cardData={topRated} toggleSwitchCount={0} />
+      <Content title="upcoming" cardData={upcoming} toggleSwitchCount={0} />
       <Content
-        title="top rated"
-        switchData={switchData[1]}
-        setToggle={setTopRatedToggle}
-        cardData={topRated}
-        toggleSwitchCount={toggleSwitchCount}
+        title="now playing"
+        cardData={nowPlaying}
+        toggleSwitchCount={0}
       />
-    </>
+    </div>
   );
 };
 
-export default Home;
+export default Movie;
