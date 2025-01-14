@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Content from "./templates/Content";
 import ContentLoader from "./Loading/ContentLoader";
+import ContentTitle from "./templates/ContentTitle";
+import ContentTitleLoader from "./Loading/ContentTitleLoader";
 
 const TvShow = () => {
   // for trending
@@ -16,7 +18,7 @@ const TvShow = () => {
   const [onTheAir, setOnTheAir] = useState([]);
 
   // Toggle states for each content section
-  const [dataToggle, setDataToggle] = useState("day");
+  const [trendingToggleTime, setTrendingToggleTime] = useState("day");
   const [toggleSwitchCount, setToggleSwitchCount] = useState(1);
 
   // for loading //
@@ -25,12 +27,15 @@ const TvShow = () => {
   const [topRatedLoading, setTopRatedLoading] = useState(false);
   const [airingToadayLoading, setAiringToadayLoading] = useState(false);
   const [onTheAirLoading, setOnTheAirLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   // trending function to call api for trending //
   const getTrending = async () => {
     setTrendingLoading(true);
     try {
-      const { data } = await axios.get(`/api/tmdb/trending/tv/${dataToggle}`);
+      const { data } = await axios.get(
+        `/api/tmdb/trending/tv/${trendingToggleTime}`
+      );
       if (data && data.results) {
         // console.log("Trending :- ", data.results.slice(0, 1));
         setTrending(data.results.slice(0, 13));
@@ -61,6 +66,7 @@ const TvShow = () => {
       setPopular([]);
     } finally {
       setPopularLoading(false);
+      setInitialLoading(false);
     }
   };
 
@@ -122,12 +128,15 @@ const TvShow = () => {
   };
 
   useEffect(() => {
-    getTrending();
     getPopular();
     getTopRated();
     getAiringToday();
     getOnTheAir();
-  }, [dataToggle]);
+  }, []);
+
+  useEffect(() => {
+    getTrending();
+  }, [trendingToggleTime]);
 
   const switchData = [
     { switchOne: "Today", switchTwo: "Week" },
@@ -135,49 +144,55 @@ const TvShow = () => {
   ];
   return (
     <div className="w-full min-h-screen relative">
-      {trendingLoading ? (
-        <ContentLoader />
+      {/* trending-content */}
+      {initialLoading ? (
+        <ContentTitleLoader />
       ) : (
-        <Content
+        <ContentTitle
           title="trending"
           switchData={switchData[0]}
-          setToggle={setDataToggle}
-          cardData={trending}
+          setToggleTime={setTrendingToggleTime}
+          setToggleType={null}
           toggleSwitchCount={toggleSwitchCount}
         />
       )}
+      {trendingLoading ? <ContentLoader /> : <Content cardData={trending} />}
 
-      {popularLoading ? (
-        <ContentLoader />
+      {/* popular-content */}
+      {initialLoading ? (
+        <ContentTitleLoader />
       ) : (
-        <Content
-          title="what's popular"
-          cardData={popular}
-          toggleSwitchCount={0}
-        />
+        <ContentTitle title="what's popular" toggleSwitchCount={0} />
       )}
+      {popularLoading ? <ContentLoader /> : <Content cardData={popular} />}
 
-      {topRatedLoading ? (
-        <ContentLoader />
+      {/* top-rated-content */}
+      {initialLoading ? (
+        <ContentTitleLoader />
       ) : (
-        <Content title="top rated" cardData={topRated} toggleSwitchCount={0} />
+        <ContentTitle title="top rated" toggleSwitchCount={0} />
       )}
+      {topRatedLoading ? <ContentLoader /> : <Content cardData={topRated} />}
 
+      {/* airing-today-content */}
+      {initialLoading ? (
+        <ContentTitleLoader />
+      ) : (
+        <ContentTitle title="airing today" toggleSwitchCount={0} />
+      )}
       {airingToadayLoading ? (
         <ContentLoader />
       ) : (
-        <Content
-          title="airing today"
-          cardData={airingToaday}
-          toggleSwitchCount={0}
-        />
+        <Content cardData={airingToaday} />
       )}
 
-      {onTheAirLoading ? (
-        <ContentLoader />
+      {/* on-the-air-content */}
+      {initialLoading ? (
+        <ContentTitleLoader />
       ) : (
-        <Content title="on the air" cardData={onTheAir} toggleSwitchCount={0} />
+        <ContentTitle title="on the air" toggleSwitchCount={0} />
       )}
+      {onTheAirLoading ? <ContentLoader /> : <Content cardData={onTheAir} />}
     </div>
   );
 };

@@ -11,7 +11,7 @@ const SubMenu = () => {
   const [data, setData] = useState([]);
 
   // Toggle states for each content section
-  const [dataToggle, setDataToggle] = useState("day");
+  const [trendingToggleTime, setTrendingToggleTime] = useState("day");
   const [toggleSwitchCount, setToggleSwitchCount] = useState(1);
 
   // for loading
@@ -35,7 +35,7 @@ const SubMenu = () => {
         } else if (type === "now-playing") {
           endpoint = "/movie/now_playing";
         } else if (type === "trending") {
-          endpoint = `/trending/movie/${dataToggle}`;
+          endpoint = `/trending/movie/${trendingToggleTime}`;
           setToggleSwitchCount(1);
         }
       } else if (category === "tv") {
@@ -48,14 +48,14 @@ const SubMenu = () => {
         } else if (type === "on-the-air") {
           endpoint = "/tv/on_the_air";
         } else if (type === "trending") {
-          endpoint = `/trending/tv/${dataToggle}`;
+          endpoint = `/trending/tv/${trendingToggleTime}`;
           setToggleSwitchCount(1);
         }
       } else if (category === "person") {
         if (type === "popular") {
           endpoint = "/person/popular";
         } else if (type === "trending") {
-          endpoint = `/trending/person/${dataToggle}`;
+          endpoint = `/trending/person/${trendingToggleTime}`;
           setToggleSwitchCount(1);
         }
       }
@@ -95,7 +95,7 @@ const SubMenu = () => {
 
   useEffect(() => {
     refreshHandler();
-  }, [category, type, dataToggle]);
+  }, [category, type, trendingToggleTime]);
 
   const switchData = [
     { switchOne: "Today", switchTwo: "Week" },
@@ -106,13 +106,14 @@ const SubMenu = () => {
     <div>
       <PageTemplate
         title={`${category} - ${type}`}
-        switchData={type === "trending" ? switchData[0] : undefined}
-        setToggle={type === "trending" ? setDataToggle : undefined}
+        switchData={type === "trending" ? switchData[0] : null}
+        setToggleTime={type === "trending" ? setTrendingToggleTime : null}
+        setToggleType={null}
+        toggleSwitchCount={type === "trending" ? toggleSwitchCount : null}
         cardData={data}
         length={data.length}
         fetchData={getData}
         hasMore={hasMore}
-        toggleSwitchCount={type === "trending" ? toggleSwitchCount : undefined}
         loading={loading}
       />
     </div>

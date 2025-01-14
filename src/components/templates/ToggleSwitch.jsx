@@ -4,6 +4,7 @@ const ToggleSwitch = ({ switchData, setToggle }) => {
   const [isOn, setIsOn] = useState(false);
 
   const handleToggle = (value, secVal) => {
+    // console.log("isOn:", value, "secVal:", secVal);
     if (isOn !== value) {
       setIsOn(value);
     }
@@ -24,7 +25,7 @@ const ToggleSwitch = ({ switchData, setToggle }) => {
         style={{
           transition: "left 0.4s cubic-bezier(0.88, -0.35, 0.565, 1.35)",
         }}
-        className={`absolute top-[2px] bg-zinc-700 h-7 w-20 md:w-24 md:h-8 lg:h-9 lg:w-28 rounded-full z-0 ${
+        className={`toggle-bg absolute top-[2px] bg-zinc-700 h-7 w-20 md:w-24 md:h-8 lg:h-9 lg:w-28 rounded-full z-0 ${
           isOn ? "left-[77.5px] md:left-[93px] lg:left-[109px]" : "left-[2px]"
         } `}
       ></div>

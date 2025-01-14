@@ -4,6 +4,8 @@ import Poster from "./Poster";
 import Content from "./templates/Content";
 import PosterLoader from "./Loading/PosterLoader";
 import ContentLoader from "./Loading/ContentLoader";
+import ContentTitle from "./templates/ContentTitle";
+import ContentTitleLoader from "./Loading/ContentTitleLoader";
 
 const Home = () => {
   // for poster
@@ -16,17 +18,18 @@ const Home = () => {
   const [topRated, setTopRated] = useState([]);
 
   // Toggle states for each content section
-  const [trendingToggleDayWeek, setTrendingToggleDayWeek] = useState("day");
-  const [trendingToggleMoviesTV, setTrendingToggleMoviesTV] = useState("movie");
-  const [popularToggle, setPopularToggle] = useState("movie");
-  const [topRatedToggle, setTopRatedToggle] = useState("movie");
+  const [trendingToggleTime, setTrendingToggleTime] = useState("day");
+  const [trendingToggleType, setTrendingToggleType] = useState("movie");
+  const [popularToggleType, setPopularToggleType] = useState("movie");
+  const [topRatedToggleType, setTopRatedToggleType] = useState("movie");
   const [toggleSwitchCount, setToggleSwitchCount] = useState(1);
 
-  // for loading //
+  // for loading
   const [loading, setLoading] = useState(false);
   const [trendingLoading, setTrendingLoading] = useState(false);
   const [popularLoading, setPopularLoading] = useState(false);
   const [topRatedLoading, setTopRatedLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   // poster function to call api for poster //
   const getPoster = async () => {
@@ -44,6 +47,7 @@ const Home = () => {
       setPoster([]);
     } finally {
       setLoading(false);
+      setInitialLoading(false);
     }
   };
 
@@ -52,7 +56,7 @@ const Home = () => {
     setTrendingLoading(true);
     try {
       const { data } = await axios.get(
-        `/api/tmdb/trending/${trendingToggleMoviesTV}/${trendingToggleDayWeek}`
+        `/api/tmdb/trending/${trendingToggleType}/${trendingToggleTime}`
       );
       if (data && data.results) {
         // console.log("Trending :- ", data.results.slice(0, 1));
@@ -72,7 +76,9 @@ const Home = () => {
   const getPopular = async () => {
     setPopularLoading(true);
     try {
-      const { data } = await axios.get(`/api/tmdb/${popularToggle}/popular`);
+      const { data } = await axios.get(
+        `/api/tmdb/${popularToggleType}/popular`
+      );
       if (data && data.results) {
         // console.log("Popular :- " , data.results.slice(0, 1));
         setPopular(data.results.slice(0, 10));
@@ -91,7 +97,9 @@ const Home = () => {
   const getTopRated = async () => {
     setTopRatedLoading(true);
     try {
-      const { data } = await axios.get(`/api/tmdb/${topRatedToggle}/top_rated`);
+      const { data } = await axios.get(
+        `/api/tmdb/${topRatedToggleType}/top_rated`
+      );
       if (data && data.results) {
         // console.log("Top-Rated :- ", data.results.slice(0, 1));
         setTopRated(data.results.slice(0, 12));
@@ -108,16 +116,19 @@ const Home = () => {
 
   useEffect(() => {
     !poster.length && getPoster();
+  }, []);
+
+  useEffect(() => {
     getTrending();
+  }, [trendingToggleTime, trendingToggleType]);
+
+  useEffect(() => {
     getPopular();
+  }, [popularToggleType]);
+
+  useEffect(() => {
     getTopRated();
-  }, [
-    poster,
-    trendingToggleDayWeek,
-    trendingToggleMoviesTV,
-    popularToggle,
-    topRatedToggle,
-  ]);
+  }, [topRatedToggleType]);
 
   const switchData = [
     { switchOne: "Today", switchTwo: "Week" },
@@ -127,40 +138,48 @@ const Home = () => {
   return (
     <div className="w-full h-full pt-8">
       {loading ? <PosterLoader /> : <Poster poster={poster} />}
-      {trendingLoading ? (
-        <ContentLoader />
+
+      {/* trending-content */}
+      {initialLoading ? (
+        <ContentTitleLoader />
       ) : (
-        <Content
+        <ContentTitle
           title="trending"
           switchData={switchData}
-          setToggleDayWeek={setTrendingToggleDayWeek}
-          setToggleMoviesTV={setTrendingToggleMoviesTV}
-          cardData={trending}
+          setToggleTime={setTrendingToggleTime}
+          setToggleType={setTrendingToggleType}
           toggleSwitchCount={2}
         />
       )}
-      {popularLoading ? (
-        <ContentLoader />
+      {trendingLoading ? <ContentLoader /> : <Content cardData={trending} />}
+
+      {/* popular-content */}
+      {initialLoading ? (
+        <ContentTitleLoader />
       ) : (
-        <Content
+        <ContentTitle
           title="what's popular"
           switchData={switchData[1]}
-          setToggle={setPopularToggle}
-          cardData={popular}
+          setToggleType={setPopularToggleType}
+          setToggleTime={null}
           toggleSwitchCount={toggleSwitchCount}
         />
       )}
-      {topRatedLoading ? (
-        <ContentLoader />
+      {popularLoading ? <ContentLoader /> : <Content cardData={popular} />}
+
+      {/* top-rated-content */}
+      {initialLoading ? (
+        <ContentTitleLoader />
       ) : (
-        <Content
+        <ContentTitle
           title="top rated"
           switchData={switchData[1]}
-          setToggle={setTopRatedToggle}
-          cardData={topRated}
+          setToggleType={setTopRatedToggleType}
+          setToggleTime={null}
           toggleSwitchCount={toggleSwitchCount}
         />
       )}
+      {topRatedLoading ? <ContentLoader /> : <Content cardData={topRated} />}
     </div>
   );
 };
