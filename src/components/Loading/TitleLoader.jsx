@@ -2,12 +2,13 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const PosterLoader = () => {
+const TitleLoader = () => {
   return (
-    <div className="w-full h-[70vw] md:h-[60vh] relative px-2">
+    <div className="switch-wrapper flex flex-col xs:flex-row justify-between items-center shrink-0 gap-4 xs:gap-0 pt-8 px-2">
+      {/* Title Skeleton */}
       <Skeleton
-        width="100%"
-        height="100%"
+        width={200}
+        height={40}
         baseColor="#27272a"
         highlightColor="#4a4a4a"
         style={{ borderRadius: "10px" }}
@@ -16,4 +17,4 @@ const PosterLoader = () => {
   );
 };
 
-export default PosterLoader;
+export default TitleLoader;

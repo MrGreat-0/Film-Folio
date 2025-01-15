@@ -96,6 +96,10 @@ const Nav = () => {
       setIsDropdownOpen(!isDropdownOpen);
     };
 
+    const handleMenuClose = () => {
+      setIsDropdownOpen(false);
+    };
+
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
@@ -132,6 +136,7 @@ const Nav = () => {
                   key={i}
                   className="text-zinc-400 text-sm hover:bg-zinc-800 pl-3 pr-8 py-2"
                   to={`${option.endpoint}`}
+                  onClick={handleMenuClose}
                 >
                   {option.name}
                 </Link>
@@ -158,6 +163,10 @@ const Nav = () => {
       }
     };
 
+    const handleMenuClose = () => {
+      setIsMenuOpen(false);
+    };
+
     useEffect(() => {
       document.addEventListener("click", handleClickOutside);
       return () => {
@@ -182,6 +191,7 @@ const Nav = () => {
                   key={i}
                   className="text-zinc-400 text-sm hover:bg-zinc-800 py-[2px]"
                   to={`${option.endpoint}`}
+                  onClick={handleMenuClose}
                 >
                   {option.name}
                 </Link>

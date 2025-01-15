@@ -3,6 +3,7 @@ import Content from "./Content";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ContentLoader from "../Loading/ContentLoader";
 import ContentTitle from "../templates/ContentTitle";
+import TitleLoader from "../Loading/TitleLoader";
 
 const PageTemplate = ({
   title,
@@ -18,13 +19,17 @@ const PageTemplate = ({
 }) => {
   return (
     <div className="w-full min-h-screen relative">
-      <ContentTitle
-        title={title}
-        switchData={switchData}
-        setToggleTime={setToggleTime}
-        setToggleType={setToggleType}
-        toggleSwitchCount={toggleSwitchCount}
-      />
+      {loading ? (
+        <TitleLoader />
+      ) : (
+        <ContentTitle
+          title={title}
+          switchData={switchData}
+          setToggleTime={setToggleTime}
+          setToggleType={setToggleType}
+          toggleSwitchCount={toggleSwitchCount}
+        />
+      )}
 
       {loading ? (
         <ContentLoader />

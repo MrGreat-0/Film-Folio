@@ -4,7 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const ContentTitleLoader = () => {
   return (
-    <div className="switch-wrapper flex flex-col xs:flex-row justify-between items-center shrink-0 gap-4 xs:gap-0 pt-8">
+    <div className="switch-wrapper flex flex-col xs:flex-row justify-between items-center shrink-0 gap-4 xs:gap-0 pt-8 px-2">
       {/* Title Skeleton */}
       <Skeleton
         width={200}

@@ -9,7 +9,7 @@ const ContentTitle = ({
   toggleSwitchCount,
 }) => {
   return (
-    <div className="switch-wrapper flex flex-col xs:flex-row justify-between items-center shrink-0 gap-4 xs:gap-0 pt-8">
+    <div className="switch-wrapper flex flex-col xs:flex-row justify-between items-center shrink-0 gap-4 xs:gap-0 pt-8 px-2">
       <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-zinc-100 whitespace-nowrap capitalize">
         {title}
       </h1>
