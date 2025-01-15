@@ -24,56 +24,52 @@ const SubMenu = () => {
   // data function to call api for data //
   const getData = useCallback(async () => {
     try {
-      let endpoint = "";
-      if (category === "movie") {
-        if (type === "popular") {
-          endpoint = "/movie/popular";
-        } else if (type === "upcoming") {
-          endpoint = "/movie/upcoming";
-        } else if (type === "top-rated") {
-          endpoint = "/movie/top_rated";
-        } else if (type === "now-playing") {
-          endpoint = "/movie/now_playing";
-        } else if (type === "trending") {
-          endpoint = `/trending/movie/${trendingToggleTime}`;
-          setToggleSwitchCount(1);
-        }
-      } else if (category === "tv") {
-        if (type === "popular") {
-          endpoint = "/tv/popular";
-        } else if (type === "airing-today") {
-          endpoint = "/tv/airing_today";
-        } else if (type === "top-rated") {
-          endpoint = "/tv/top_rated";
-        } else if (type === "on-the-air") {
-          endpoint = "/tv/on_the_air";
-        } else if (type === "trending") {
-          endpoint = `/trending/tv/${trendingToggleTime}`;
-          setToggleSwitchCount(1);
-        }
-      } else if (category === "person") {
-        if (type === "popular") {
-          endpoint = "/person/popular";
-        } else if (type === "trending") {
-          endpoint = `/trending/person/${trendingToggleTime}`;
-          setToggleSwitchCount(1);
-        }
+      const endpoints = {
+        movie: {
+          popular: "/movie/popular",
+          upcoming: "/movie/upcoming",
+          "top-rated": "/movie/top_rated",
+          "now-playing": "/movie/now_playing",
+          trending: `/trending/movie/${trendingToggleTime}`,
+        },
+        tv: {
+          popular: "/tv/popular",
+          "airing-today": "/tv/airing_today",
+          "top-rated": "/tv/top_rated",
+          "on-the-air": "/tv/on_the_air",
+          trending: `/trending/tv/${trendingToggleTime}`,
+        },
+        person: {
+          popular: "/person/popular",
+          trending: `/trending/person/${trendingToggleTime}`,
+        },
+      };
+
+      const endpoint = endpoints[category]?.[type];
+      if (!endpoint) {
+        console.error("Invalid category or type");
+        setHasMore(false);
+        setData([]);
+        return;
+      }
+
+      if (type === "trending") {
+        setToggleSwitchCount(1);
       }
 
       const { data } = await axios.get(
         `/api/tmdb/${endpoint}?page=${pageRef.current}`
       );
 
-      if (data && data.results && data.results.length > 0) {
-        // console.log("data :- ", data.results.slice(0, 1));
+      if (data?.results?.length) {
         setData((prevState) => [...prevState, ...data.results]);
         pageRef.current += 1;
-        setHasMore(data.results.length > 0);
+        setHasMore(true);
       } else {
         setHasMore(false);
       }
     } catch (error) {
-      console.log("Data Error: ", error);
+      console.error("Data Error:", error);
       setHasMore(false);
       setData([]);
     } finally {

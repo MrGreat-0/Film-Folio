@@ -3,7 +3,7 @@ import noimage from "/no-image.jpg";
 
 const Card = ({ data }) => {
   return (
-    <div className="card-wrapper w-full h-full flex flex-col aspect-[9/12] bg-zinc-600 text-white rounded-lg overflow-hidden relative">
+    <div className="card-wrapper flex flex-col aspect-[9/12] bg-zinc-600 text-white rounded-lg overflow-hidden relative">
       <img
         style={{ objectPosition: "center center" }}
         className="w-full h-[80%]  object-cover"
