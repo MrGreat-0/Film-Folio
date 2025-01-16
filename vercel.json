@@ -6,7 +6,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "./",
+      "src": "package.json",
       "use": "@vercel/static-build",
       "config": { "distDir": "dist" }
     }
@@ -22,6 +22,6 @@
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production"  
   }
 }
