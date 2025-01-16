@@ -4,12 +4,24 @@
     {
       "src": "src/Backend/Server.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "./",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
     }
   ],
   "routes": [
     {
       "src": "/api/.*",
       "dest": "Server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
