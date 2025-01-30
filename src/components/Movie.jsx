@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../utils/axios";
 import Content from "./templates/Content";
 import ContentLoader from "./Loading/ContentLoader";
 import ContentTitle from "./templates/ContentTitle";
@@ -33,9 +33,7 @@ const Movie = () => {
   const getTrending = async () => {
     setTrendingLoading(true);
     try {
-      const { data } = await axios.get(
-        `/api/tmdb/trending/movie/${trendingToggleTime}`
-      );
+      const { data } = await axios.get(`/trending/movie/${trendingToggleTime}`);
       if (data && data.results) {
         // console.log("Trending :- ", data.results.slice(0, 1));
         setTrending(data.results.slice(0, 13));
@@ -54,7 +52,7 @@ const Movie = () => {
   const getPopular = async () => {
     setPopularLoading(true);
     try {
-      const { data } = await axios.get("/api/tmdb/movie/popular");
+      const { data } = await axios.get("/movie/popular");
       if (data && data.results) {
         // console.log("Popular :- " , data.results.slice(0, 1));
         setPopular(data.results.slice(0, 11));
@@ -74,7 +72,7 @@ const Movie = () => {
   const getTopRated = async () => {
     setTopRatedLoading(true);
     try {
-      const { data } = await axios.get("/api/tmdb/movie/top_rated");
+      const { data } = await axios.get("/movie/top_rated");
       if (data && data.results) {
         // console.log("Top-Rated :- ", data.results.slice(0, 1));
         setTopRated(data.results.slice(0, 12));
@@ -93,7 +91,7 @@ const Movie = () => {
   const getUpcoming = async () => {
     setUpcomingLoading(true);
     try {
-      const { data } = await axios.get("/api/tmdb/movie/upcoming");
+      const { data } = await axios.get("/movie/upcoming");
       if (data && data.results) {
         // console.log("Top-Rated :- ", data.results.slice(0, 1));
         setUpcoming(data.results.slice(0, 11));
@@ -112,7 +110,7 @@ const Movie = () => {
   const getNowPlaying = async () => {
     setNowPlayingLoading(true);
     try {
-      const { data } = await axios.get("/api/tmdb/movie/now_playing");
+      const { data } = await axios.get("/movie/now_playing");
       if (data && data.results) {
         // console.log("Top-Rated :- ", data.results.slice(0, 1));
         setNowPlaying(data.results.slice(0, 13));

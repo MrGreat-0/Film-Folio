@@ -1,11 +1,11 @@
-// import axios from "axios";
+import axios from "axios";
 
-// const instance = axios.create({
-//   baseURL: " https://api.themoviedb.org/3/",
-//   headers: {
-//     accept: "application/json",
-//     Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
-//   },
-// });
+const instance = axios.create({
+  baseURL: " https://api.themoviedb.org/3/",
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${import.meta.env.VITE_API_KEY}`,
+  },
+});
 
-// export default instance;
+export default instance;

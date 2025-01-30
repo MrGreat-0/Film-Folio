@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../utils/axios";
 import Poster from "./Poster";
 import Content from "./templates/Content";
 import PosterLoader from "./Loading/PosterLoader";
@@ -35,7 +35,7 @@ const Home = () => {
   const getPoster = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("/api/tmdb/trending/all/day");
+      const { data } = await axios.get("/trending/all/day");
       if (data && data.results) {
         // console.log("Poster :- " , data.results.slice(0, 1));
         setPoster(data.results.slice(0, 5));
@@ -56,7 +56,7 @@ const Home = () => {
     setTrendingLoading(true);
     try {
       const { data } = await axios.get(
-        `/api/tmdb/trending/${trendingToggleType}/${trendingToggleTime}`
+        `/trending/${trendingToggleType}/${trendingToggleTime}`
       );
       if (data && data.results) {
         // console.log("Trending :- ", data.results.slice(0, 1));
@@ -76,9 +76,7 @@ const Home = () => {
   const getPopular = async () => {
     setPopularLoading(true);
     try {
-      const { data } = await axios.get(
-        `/api/tmdb/${popularToggleType}/popular`
-      );
+      const { data } = await axios.get(`/${popularToggleType}/popular`);
       if (data && data.results) {
         // console.log("Popular :- " , data.results.slice(0, 1));
         setPopular(data.results.slice(0, 10));
@@ -97,9 +95,7 @@ const Home = () => {
   const getTopRated = async () => {
     setTopRatedLoading(true);
     try {
-      const { data } = await axios.get(
-        `/api/tmdb/${topRatedToggleType}/top_rated`
-      );
+      const { data } = await axios.get(`/${topRatedToggleType}/top_rated`);
       if (data && data.results) {
         // console.log("Top-Rated :- ", data.results.slice(0, 1));
         setTopRated(data.results.slice(0, 12));
@@ -137,7 +133,11 @@ const Home = () => {
 
   return (
     <div className="w-full h-full pt-8">
-      {loading ? <PosterLoader /> : <Poster poster={poster} />}
+      {loading ? (
+        <PosterLoader />
+      ) : (
+        <Poster poster={poster} title={trendingToggleType} />
+      )}
 
       {/* trending-content */}
       {initialLoading ? (
@@ -151,7 +151,11 @@ const Home = () => {
           toggleSwitchCount={2}
         />
       )}
-      {trendingLoading ? <ContentLoader /> : <Content cardData={trending} />}
+      {trendingLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content cardData={trending} title={trendingToggleType} />
+      )}
 
       {/* popular-content */}
       {initialLoading ? (
@@ -165,7 +169,11 @@ const Home = () => {
           toggleSwitchCount={toggleSwitchCount}
         />
       )}
-      {popularLoading ? <ContentLoader /> : <Content cardData={popular} />}
+      {popularLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content cardData={popular} title={popularToggleType} />
+      )}
 
       {/* top-rated-content */}
       {initialLoading ? (
@@ -179,7 +187,11 @@ const Home = () => {
           toggleSwitchCount={toggleSwitchCount}
         />
       )}
-      {topRatedLoading ? <ContentLoader /> : <Content cardData={topRated} />}
+      {topRatedLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content cardData={topRated} title={topRatedToggleType} />
+      )}
     </div>
   );
 };

@@ -8,7 +8,9 @@ import "swiper/css/autoplay";
 import noimage from "/no-image.jpg";
 import posterStyle from "./Poster.module.css";
 
-const Poster = ({ poster }) => {
+const Poster = ({ poster, title }) => {
+  // const formattedTitle = title.replace(" ", "-").toLowerCase();
+  // console.log(poster);
   const PosterDetail = ({ p, infoStyle }) => {
     return (
       <div
@@ -22,26 +24,48 @@ const Poster = ({ poster }) => {
             "No Information"}
         </h1>
         <div className="poster-info-left-down hidden md:flex gap-3 items-center cursor-pointer relative">
-          <span className="text-zinc-300 flex gap-1 items-center">
-            <i className="ri-megaphone-fill text-zinc-500"></i>
-            {p.release_date || "No Information"}
-          </span>
-          <span className="text-zinc-300 uppercase flex gap-1 items-center">
-            <i className="ri-album-fill text-zinc-500"></i>
-            {p.media_type || "No Information"}
-          </span>
+          {p.release_date ? (
+            <span className="text-zinc-300 flex gap-1 items-center">
+              <i className="ri-megaphone-fill text-zinc-500"></i>
+              {p.release_date || "No Information"}
+            </span>
+          ) : (
+            <span className="text-zinc-300 flex gap-1 items-center">
+              <i className="ri-star-fill text-zinc-500"></i>
+              {p.vote_average || "No Information"}
+            </span>
+          )}
+          {p.media_type ? (
+            <span className="text-zinc-300 uppercase flex gap-1 items-center">
+              <i className="ri-album-fill text-zinc-500"></i>
+              {p.media_type || "No Information"}
+            </span>
+          ) : (
+            <span className="text-zinc-300 uppercase flex gap-1 items-center">
+              <i className="ri-global-fill text-zinc-500"></i>
+              {p.original_language || "No Information"}
+            </span>
+          )}
         </div>
-        <p className="poster-detail text-zinc-200 font-semibold md:text-zinc-300 text-sm line-clamp-2 xl:line-clamp-none xl:text-lg xl:leading-tight w-[90%] md:w-1/2 xl:w-[95%]">
+        <p className="poster-detail font-semibold md:text-zinc-300 text-sm line-clamp-2 xl:line-clamp-none xl:text-lg xl:leading-tight w-[90%] md:w-1/2 xl:w-[95%]">
           {p.overview ? (
             <>
               {p.overview.slice(0, 150)}...
-              <Link className="text-blue-400 text-base">more</Link>
+              <Link
+                to={`/${p.media_type || formattedTitle}/details/${p.id}`}
+                className="text-blue-400 text-base"
+              >
+                more
+              </Link>
             </>
           ) : (
             "No Information"
           )}
         </p>
-        <Link className="poster-trailer-btn py-1 px-2  xl:py-2 xl:px-6 rounded-lg text-zinc-100 font-semibold lg:text-lg bg-blue-500 uppercase">
+        <Link
+          to={`${title}/details/${p.id}/watch`}
+          className="poster-trailer-btn py-1 px-2 xl:py-2 xl:px-6 rounded-lg text-zinc-100 font-semibold lg:text-lg bg-blue-500 uppercase"
+        >
           <i className="ri-play-large-fill"></i> Watch Trailer
         </Link>
       </div>
@@ -75,11 +99,10 @@ const Poster = ({ poster }) => {
                   className={`poster-image-right ${posterStyle.posterRight} h-full w-full xl:w-3/5 relative bg-slate-600`}
                 >
                   <img
-                    style={{ objectPosition: "center center" }}
-                    className="w-full h-full md:h-auto object-cover relative"
+                    className="w-full h-full md:h-auto block bg-cover bg-center bg-no-repeat relative"
                     src={
-                      p.poster_path ||
                       p.backdrop_path ||
+                      p.poster_path ||
                       p.profile_path ||
                       (p.known_for &&
                         p.known_for[0] &&

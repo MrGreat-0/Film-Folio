@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import axios from "..//utils/axios";
 import PageTemplate from "./templates/PageTemplate";
 import { useCallback } from "react";
 import { useParams } from "react-router-dom";
@@ -57,9 +57,7 @@ const SubMenu = () => {
         setToggleSwitchCount(1);
       }
 
-      const { data } = await axios.get(
-        `/api/tmdb/${endpoint}?page=${pageRef.current}`
-      );
+      const { data } = await axios.get(`${endpoint}?page=${pageRef.current}`);
 
       if (data?.results?.length) {
         setData((prevState) => [...prevState, ...data.results]);
@@ -111,6 +109,7 @@ const SubMenu = () => {
         fetchData={getData}
         hasMore={hasMore}
         loading={loading}
+        category={category}
       />
     </div>
   );

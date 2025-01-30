@@ -4,6 +4,10 @@ import Home from "../components/Home";
 import Movie from "../components/Movie";
 import SubMenu from "../components/SubMenu";
 import TvShow from "../components/TvShow";
+import MovieDetails from "../components/MovieDetails";
+import TvDetails from "../components/TvDetails";
+import PersonDetails from "../components/PersonDetails";
+import Trailer from "../components/Trailer";
 
 const Routing = () => {
   return (
@@ -13,6 +17,13 @@ const Routing = () => {
         <Route path="/movie" element={<Movie />} />
         <Route path="/tv" element={<TvShow />} />
         <Route path="/:category/:type" element={<SubMenu />} />
+        <Route path="/movie/details/:id" element={<MovieDetails />}>
+          <Route path="watch" element={<Trailer />} />
+        </Route>
+        <Route path="/tv/details/:id" element={<TvDetails />}>
+          <Route path="watch" element={<Trailer />} />
+        </Route>
+        <Route path="/person/details/:id" element={<PersonDetails />} />
       </Routes>
     </div>
   );

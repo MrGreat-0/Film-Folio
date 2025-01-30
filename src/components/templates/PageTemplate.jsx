@@ -16,6 +16,7 @@ const PageTemplate = ({
   hasMore,
   toggleSwitchCount,
   loading,
+  category,
 }) => {
   return (
     <div className="w-full min-h-screen relative">
@@ -45,7 +46,7 @@ const PageTemplate = ({
             </p>
           }
         >
-          <Content cardData={cardData} />
+          <Content cardData={cardData} title={category} />
         </InfiniteScroll>
       )}
     </div>

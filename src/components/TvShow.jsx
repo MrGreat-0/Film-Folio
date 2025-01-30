@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../utils/axios";
 import Content from "./templates/Content";
 import ContentLoader from "./Loading/ContentLoader";
 import ContentTitle from "./templates/ContentTitle";
@@ -33,9 +33,7 @@ const TvShow = () => {
   const getTrending = async () => {
     setTrendingLoading(true);
     try {
-      const { data } = await axios.get(
-        `/api/tmdb/trending/tv/${trendingToggleTime}`
-      );
+      const { data } = await axios.get(`/trending/tv/${trendingToggleTime}`);
       if (data && data.results) {
         // console.log("Trending :- ", data.results.slice(0, 1));
         setTrending(data.results.slice(0, 13));
@@ -54,7 +52,7 @@ const TvShow = () => {
   const getPopular = async () => {
     setPopularLoading(true);
     try {
-      const { data } = await axios.get(`/api/tmdb/tv/popular`);
+      const { data } = await axios.get(`/tv/popular`);
       if (data && data.results) {
         // console.log("Popular :- " , data.results.slice(0, 1));
         setPopular(data.results.slice(0, 11));
@@ -74,7 +72,7 @@ const TvShow = () => {
   const getTopRated = async () => {
     setTopRatedLoading(true);
     try {
-      const { data } = await axios.get(`/api/tmdb/tv/top_rated`);
+      const { data } = await axios.get(`/tv/top_rated`);
       if (data && data.results) {
         // console.log("Top-Rated :- ", data.results.slice(0, 1));
         setTopRated(data.results.slice(0, 12));
@@ -93,7 +91,7 @@ const TvShow = () => {
   const getAiringToday = async () => {
     setAiringToadayLoading(true);
     try {
-      const { data } = await axios.get(`/api/tmdb/tv/airing_today`);
+      const { data } = await axios.get(`/tv/airing_today`);
       if (data && data.results) {
         // console.log("Airing-Today :- ", data.results.slice(0, 1));
         setAiringToaday(data.results.slice(0, 11));
@@ -112,7 +110,7 @@ const TvShow = () => {
   const getOnTheAir = async () => {
     setOnTheAirLoading(true);
     try {
-      const { data } = await axios.get(`/api/tmdb/tv/on_the_air`);
+      const { data } = await axios.get(`/tv/on_the_air`);
       if (data && data.results) {
         // console.log("On-The-Air :- ", data.results.slice(0, 1));
         setOnTheAir(data.results.slice(0, 13));

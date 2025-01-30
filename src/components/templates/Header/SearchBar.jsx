@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import axios from "../../../utils/axios";
 import { Link } from "react-router-dom";
 import noimage from "/no-image.jpg";
 import SearchBarLoader from "../../Loading/SearchBarLoader";
 
-const SearchBar = ({ containerStyle, messageStyle, innerWidth }) => {
+const SearchBar = ({ containerStyle, messageStyle }) => {
   // nav-search-input through onChange //
   const [query, setQuery] = useState("");
 
@@ -32,8 +32,10 @@ const SearchBar = ({ containerStyle, messageStyle, innerWidth }) => {
         setSearches([]); // Optionally clear the searches if the query is empty
         return;
       }
-      const { data } = await axios.get(`/api/tmdb/search/multi`, {
-        params: { query },
+      const { data } = await axios.get("/search/multi", {
+        params: {
+          query: encodeURIComponent(query),
+        },
       });
 
       if (data && data.results) {
@@ -60,6 +62,12 @@ const SearchBar = ({ containerStyle, messageStyle, innerWidth }) => {
     if (searchRef.current && !searchRef.current.contains(e.target)) {
       setIsDropdownOpen(false);
     }
+  };
+
+  // nav-search function to close search-bar and set-query empty //
+  const handleClick = () => {
+    setIsDropdownOpen(false);
+    setQuery("");
   };
 
   // nav-search-input-shortcut-key-function //
@@ -177,17 +185,19 @@ const SearchBar = ({ containerStyle, messageStyle, innerWidth }) => {
           ) : (
             searches.map((s, i) => (
               <Link
+                to={`/${s.media_type}/details/${s.id}`}
+                onClick={handleClick}
                 key={i}
                 className={`dropDown w-full flex items-center gap-6 px-4 py-3 sm:px-6 sm:py-4 hover:bg-zinc-800 ${
                   i % 2 === 0 ? "bg-zinc-900" : "bg-neutral-900"
                 }`}
               >
                 <img
-                  className="h-14 w-11 object-cover object-center bg-zinc-600 rounded-sm"
+                  className="h-14 w-11 block bg-cover bg-center bg-no-repeat bg-zinc-600 rounded-sm"
                   src={
-                    s.backdrop_path ||
                     s.poster_path ||
                     s.profile_path ||
+                    s.backdrop_path ||
                     (s.known_for &&
                       s.known_for[0] &&
                       s.known_for[0].poster_path) ||
@@ -195,9 +205,9 @@ const SearchBar = ({ containerStyle, messageStyle, innerWidth }) => {
                       s.known_for[1] &&
                       s.known_for[1].backdrop_path)
                       ? `https://image.tmdb.org/t/p/original/${
-                          s.backdrop_path ||
                           s.poster_path ||
                           s.profile_path ||
+                          s.backdrop_path ||
                           (s.known_for &&
                             s.known_for[0] &&
                             s.known_for[0].poster_path) ||

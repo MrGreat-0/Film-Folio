@@ -20,3 +20,7 @@
 ::-o-scrollbar {
     width: 0px;
 }
+
+body {
+    background-color: #1F1E24;
+}
