@@ -54,61 +54,66 @@ const PersonDetails = () => {
     );
   };
 
-  const CastInfo = ({ data, ind, type }) => {
+  const CastInfo = ({ data, type }) => {
     return (
-      <Link
-        to={`/${type}/details/${data.id}`}
-        className={`cast-${type} w-full flex items-center gap-6 px-4 py-3 sm:px-6 sm:py-4 hover:bg-zinc-800 ${
-          ind % 2 === 0 ? "bg-zinc-900" : "bg-neutral-900"
-        }`}
-      >
-        <img
-          className="h-14 w-11 block bg-cover bg-center bg-no-repeat bg-zinc-600 rounded-sm"
-          src={
-            data.poster_path ||
-            data.backdrop_path ||
-            data.profile_path ||
-            (data.known_for &&
-              data.known_for[0] &&
-              data.known_for[0].poster_path) ||
-            (data.known_for &&
-              data.known_for[1] &&
-              data.known_for[1].backdrop_path)
-              ? `https://image.tmdb.org/t/p/original/${
-                  data.poster_path ||
-                  data.backdrop_path ||
-                  data.profile_path ||
-                  (data.known_for &&
-                    data.known_for[0] &&
-                    data.known_for[0].poster_path) ||
-                  (data.known_for &&
-                    data.known_for[1] &&
-                    data.known_for[1].backdrop_path)
-                }`
-              : noimage
-          }
-          alt={
-            data.title ||
-            data.original_title ||
-            data.name ||
-            data.original_name ||
-            "Image"
-          }
-        />
-        <div className="dropDown-right flex flex-col">
-          <span className="text-zinc-400 text-base sm:text-lg">
-            {data.name ||
-              data.title ||
-              data.original_name ||
-              data.original_title}
-          </span>
+      <div className="w-full h-[60vh] overflow-y-auto shadow-md shadow-zinc-400 relative">
+        {data.slice(0, 30).map((data, ind) => (
+          <Link
+            to={`/${type}/details/${data.id}`}
+            key={ind}
+            className={`cast-${type} w-full flex items-center gap-6 px-4 py-3 sm:px-6 sm:py-4 hover:bg-zinc-800 ${
+              ind % 2 === 0 ? "bg-zinc-900" : "bg-neutral-900"
+            }`}
+          >
+            <img
+              className="h-14 w-11 block bg-cover bg-center bg-no-repeat bg-zinc-600 rounded-sm"
+              src={
+                data.poster_path ||
+                data.backdrop_path ||
+                data.profile_path ||
+                (data.known_for &&
+                  data.known_for[0] &&
+                  data.known_for[0].poster_path) ||
+                (data.known_for &&
+                  data.known_for[1] &&
+                  data.known_for[1].backdrop_path)
+                  ? `https://image.tmdb.org/t/p/original/${
+                      data.poster_path ||
+                      data.backdrop_path ||
+                      data.profile_path ||
+                      (data.known_for &&
+                        data.known_for[0] &&
+                        data.known_for[0].poster_path) ||
+                      (data.known_for &&
+                        data.known_for[1] &&
+                        data.known_for[1].backdrop_path)
+                    }`
+                  : noimage
+              }
+              alt={
+                data.title ||
+                data.original_title ||
+                data.name ||
+                data.original_name ||
+                "Image"
+              }
+            />
+            <div className="dropDown-right flex flex-col">
+              <span className="text-zinc-400 text-base sm:text-lg">
+                {data.name ||
+                  data.title ||
+                  data.original_name ||
+                  data.original_title}
+              </span>
 
-          <div className="character-name flex gap-2 text-zinc-400 text-base">
-            <span>Character:</span>
-            <span>{data.character || "No Info."}</span>
-          </div>
-        </div>
-      </Link>
+              <div className="character-name flex gap-2 text-zinc-400 text-base">
+                <span>Character:</span>
+                <span>{data.character || "No Info."}</span>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
     );
   };
 
@@ -330,28 +335,14 @@ const PersonDetails = () => {
             <h3 className="font-semibold text-4xl text-nowrap pl-3 pb-5">
               Movie (Cast In)
             </h3>
-            <div className="w-full h-[60vh] overflow-y-auto shadow-md shadow-zinc-400 relative">
-              {info.movieCredits.cast &&
-                info.movieCredits.cast
-                  .slice(0, 30)
-                  .map((data, ind) => (
-                    <CastInfo data={data} key={ind} type="movie" />
-                  ))}
-            </div>
+            <CastInfo data={info.movieCredits.cast} type="movie" />
           </div>
 
           <div className="tv-cast-in lg:w-1/2 rounded-md overflow-hidden mx-auto lg:mx-0 relative">
             <h3 className="font-semibold text-4xl text-nowrap pl-3 pb-5">
               TV (Cast In)
             </h3>
-            <div className="w-full h-[60vh] overflow-y-auto shadow-md shadow-zinc-400 relative">
-              {info.tvCredits.cast &&
-                info.tvCredits.cast
-                  .slice(0, 30)
-                  .map((data, ind) => (
-                    <CastInfo data={data} key={ind} type="tv" />
-                  ))}
-            </div>
+            <CastInfo data={info.tvCredits.cast} type="tv" />
           </div>
         </div>
       </div>
