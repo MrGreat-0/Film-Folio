@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "..//utils/axios";
+import axios from "../utils/axios";
 import PageTemplate from "./templates/PageTemplate";
 import { useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const SubMenu = () => {
   const { category, type } = useParams();
+  const navigate = useNavigate();
 
   // for data
   const [data, setData] = useState([]);
@@ -48,6 +49,7 @@ const SubMenu = () => {
       const endpoint = endpoints[category]?.[type];
       if (!endpoint) {
         console.error("Invalid category or type");
+        navigate("/404", { replace: true });
         setHasMore(false);
         setData([]);
         return;
@@ -68,6 +70,7 @@ const SubMenu = () => {
       }
     } catch (error) {
       console.error("Data Error:", error);
+      navigate("/404", { replace: true });
       setHasMore(false);
       setData([]);
     } finally {

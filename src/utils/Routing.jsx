@@ -8,6 +8,7 @@ import MovieDetails from "../components/MovieDetails";
 import TvDetails from "../components/TvDetails";
 import PersonDetails from "../components/PersonDetails";
 import Trailer from "../components/Trailer";
+import NotFound from "../components/NotFound";
 
 const Routing = () => {
   return (
@@ -24,6 +25,8 @@ const Routing = () => {
           <Route path="watch" element={<Trailer />} />
         </Route>
         <Route path="/person/details/:id" element={<PersonDetails />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/404" element={<NotFound />} />
       </Routes>
     </div>
   );
