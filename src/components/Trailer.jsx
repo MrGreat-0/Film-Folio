@@ -33,12 +33,7 @@ const Trailer = () => {
             <ReactPlayer
               width="100%"
               height="100%"
-              url={`https://www.youtube.com/watch?v=${trailer.key}`}
-              config={{
-                youtube: {
-                  crossOrigin: "anonymous",
-                },
-              }}
+              url={`https://www.youtube.com/watch?v=${trailer.key}&enablejsapi=1`}
             />
           ) : (
             <div className="w-full h-full grid place-items-center">
