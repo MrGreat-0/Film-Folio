@@ -34,7 +34,11 @@ const Trailer = () => {
               width="100%"
               height="100%"
               url={`https://www.youtube.com/watch?v=${trailer.key}`}
-              origin="https://film-folio-pi.vercel.app"
+              config={{
+                youtube: {
+                  crossOrigin: "anonymous",
+                },
+              }}
             />
           ) : (
             <div className="w-full h-full grid place-items-center">
