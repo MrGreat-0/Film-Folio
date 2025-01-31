@@ -27,9 +27,9 @@ Filmfolio is a React-based web application that allows users to explore movies, 
 - src/components: Contains all the UI components (e.g., Home, MovieDetails, etc.)
 - src/axios.js: Axios instance configured with TMDb API.
 - src/Routing.js: Contains routes for different pages in the app.
-- src/assets: Contains static assets like images or icons.
+- src/public: Contains static public like images or icons.
 
 # Visit the App
 
 You can also visit the live demo of Filmfolio here:
-[Filmfolio Live Demo]()
+[Filmfolio Live Demo](https://film-folio-pi.vercel.app)
