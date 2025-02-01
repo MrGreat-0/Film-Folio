@@ -82,7 +82,7 @@ const TvDetails = () => {
   };
 
   return info ? (
-    <div className="tv-detatil-wrapper w-full min-h-screen relative">
+    <div className="tv-detatil-wrapper w-full min-h-[90vh] relative">
       <div
         style={{
           background: `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.7),rgba(0,0,0,0.9)), url(https://image.tmdb.org/t/p/original/${

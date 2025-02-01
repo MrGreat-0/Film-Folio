@@ -19,7 +19,7 @@ const PageTemplate = ({
   category,
 }) => {
   return (
-    <div className="w-full min-h-screen relative">
+    <div className="w-full min-h-[90vh] relative">
       {loading ? (
         <TitleLoader />
       ) : (
@@ -32,23 +32,25 @@ const PageTemplate = ({
         />
       )}
 
-      {loading ? (
-        <ContentLoader />
-      ) : (
-        <InfiniteScroll
-          dataLength={length}
-          next={fetchData}
-          hasMore={hasMore}
-          loader={<ContentLoader />}
-          endMessage={
-            <p style={{ textAlign: "center", color: "#f4f4f5" }}>
-              You have seen it all!
-            </p>
-          }
-        >
-          <Content cardData={cardData} title={category} />
-        </InfiniteScroll>
-      )}
+      <div className="infinite-content-container pb-10 relative">
+        {loading ? (
+          <ContentLoader />
+        ) : (
+          <InfiniteScroll
+            dataLength={length}
+            next={fetchData}
+            hasMore={hasMore}
+            loader={<ContentLoader />}
+            endMessage={
+              <p style={{ textAlign: "center", color: "#f4f4f5" }}>
+                You have seen it all!
+              </p>
+            }
+          >
+            <Content cardData={cardData} title={category} />
+          </InfiniteScroll>
+        )}
+      </div>
     </div>
   );
 };

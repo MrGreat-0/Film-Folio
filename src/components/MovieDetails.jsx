@@ -64,7 +64,7 @@ const MovieDetails = () => {
   };
 
   return info ? (
-    <div className="movie-detatil-wrapper w-full h-full pb-10 relative">
+    <div className="movie-detatil-wrapper w-full min-h-[90vh] pb-10 relative">
       <div
         style={{
           background: `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.7),rgba(0,0,0,0.9)), url(https://image.tmdb.org/t/p/original/${

@@ -141,7 +141,7 @@ const TvShow = () => {
     { switchOne: "Movies", switchTwo: "TV Shows" },
   ];
   return (
-    <div className="w-full min-h-screen relative">
+    <div className="w-full min-h-[90vh] relative">
       {/* trending-content */}
       {initialLoading ? (
         <ContentTitleLoader />

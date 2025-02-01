@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="footer w-full min-h-[30vh] bg-zinc-900 flex justify-center items-center text-center sm:text-left sm:justify-start px-4 py-10 relative">
+    <div className="footer w-full min-h-[35vh] bg-zinc-900 flex justify-center items-center text-center sm:text-left sm:justify-start px-4 py-10 relative">
       <div className="footer-wrapper w-fit h-fit flex flex-col gap-2 relative">
         <Link to={"/"} className="logo mx-auto sm:mx-0 relative">
           <img

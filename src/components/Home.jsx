@@ -132,7 +132,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="w-full h-full pt-8">
+    <div className="w-full min-h-[90vh] pt-8">
       {loading ? (
         <PosterLoader />
       ) : (
@@ -176,22 +176,24 @@ const Home = () => {
       )}
 
       {/* top-rated-content */}
-      {initialLoading ? (
-        <ContentTitleLoader />
-      ) : (
-        <ContentTitle
-          title="top rated"
-          switchData={switchData[1]}
-          setToggleType={setTopRatedToggleType}
-          setToggleTime={null}
-          toggleSwitchCount={toggleSwitchCount}
-        />
-      )}
-      {topRatedLoading ? (
-        <ContentLoader />
-      ) : (
-        <Content cardData={topRated} title={topRatedToggleType} />
-      )}
+      <div className="top-rated pb-10 relative">
+        {initialLoading ? (
+          <ContentTitleLoader />
+        ) : (
+          <ContentTitle
+            title="top rated"
+            switchData={switchData[1]}
+            setToggleType={setTopRatedToggleType}
+            setToggleTime={null}
+            toggleSwitchCount={toggleSwitchCount}
+          />
+        )}
+        {topRatedLoading ? (
+          <ContentLoader />
+        ) : (
+          <Content cardData={topRated} title={topRatedToggleType} />
+        )}
+      </div>
     </div>
   );
 };
