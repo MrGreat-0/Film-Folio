@@ -34,6 +34,7 @@ const Trailer = () => {
               width="100%"
               height="100%"
               url={`https://www.youtube.com/watch?v=${trailer.key}`}
+              controls={true}
             />
           ) : (
             <div className="w-full h-full grid place-items-center">
