@@ -224,6 +224,7 @@ const SearchBar = ({ containerStyle, messageStyle }) => {
                     s.original_title ||
                     "Image"
                   }
+                  loading="lazy"
                 />
                 <div className="dropDown-right flex flex-col">
                   <span className="text-zinc-400 text-base sm:text-lg">

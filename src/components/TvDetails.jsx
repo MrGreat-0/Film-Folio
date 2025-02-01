@@ -42,6 +42,7 @@ const TvDetails = () => {
                       : noimage
                   }
                   alt="tv-clip"
+                  loading="lazy"
                 />
               ) : type === "video" ? (
                 <img
@@ -52,6 +53,7 @@ const TvDetails = () => {
                       : noimage
                   }
                   alt={d.name}
+                  loading="lazy"
                 />
               ) : (
                 <div className="season-slider-wrapper flex flex-col">
@@ -65,6 +67,7 @@ const TvDetails = () => {
                         : noimage
                     }
                     alt={d.name}
+                    loading="lazy"
                   />
                   <span className="text-center text-xs xs:text-sm font-semibold">
                     {d.name}
@@ -132,6 +135,7 @@ const TvDetails = () => {
                 info.detail.original_title ||
                 "Image"
               }
+              loading="lazy"
             />
           </div>
         </div>
@@ -184,6 +188,7 @@ const TvDetails = () => {
                   className="w-8 block bg-cover bg-center bg-no-repeat"
                   src="/imdb-icon.svg"
                   alt="imdb-logo"
+                  loading="lazy"
                 />
               </a>
             )}
@@ -334,6 +339,7 @@ const TvDetails = () => {
                         className="h-10 block bg-cover bg-center bg-no-repeat"
                         src={`https://image.tmdb.org/t/p/original/${pc.logo_path}`}
                         alt={pc.name}
+                        loading="lazy"
                       />
                       <span className="text-lg font-semibold place-self-center">
                         {pc.name}
@@ -366,6 +372,7 @@ const TvDetails = () => {
                           className="h-10 block rounded-lg bg-cover bg-center bg-no-repeat"
                           src={`https://image.tmdb.org/t/p/original/${f.logo_path}`}
                           alt={f.provider_name}
+                          loading="lazy"
                         />
                       );
                     })
@@ -388,6 +395,7 @@ const TvDetails = () => {
                           className="h-10 block rounded-lg bg-cover bg-center bg-no-repeat"
                           src={`https://image.tmdb.org/t/p/original/${b.logo_path}`}
                           alt={b.provider_name}
+                          loading="lazy"
                         />
                       );
                     })
@@ -412,6 +420,7 @@ const TvDetails = () => {
                           className="h-10 block rounded-lg bg-cover bg-center bg-no-repeat"
                           src={`https://image.tmdb.org/t/p/original/${r.logo_path}`}
                           alt={r.provider_name}
+                          loading="lazy"
                         />
                       );
                     })
@@ -474,6 +483,7 @@ const TvDetails = () => {
                               : noimage
                           }
                           alt={c.name || c.original_name}
+                          loading="lazy"
                         />
                       </div>
                       <div className="cast-name w-fit h-fit flex flex-col relative">

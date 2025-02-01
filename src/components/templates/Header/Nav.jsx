@@ -250,6 +250,7 @@ const Nav = () => {
             className="w-full h-full object-contain"
             src="/FilmFolio-full-logo.svg"
             alt="logo"
+            loading="lazy"
           />
         </Link>
       </div>

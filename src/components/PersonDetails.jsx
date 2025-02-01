@@ -42,6 +42,7 @@ const PersonDetails = () => {
                       : noimage
                   }
                   alt={d.name}
+                  loading="lazy"
                 />
                 <span className="text-center text-xs xs:text-sm font-semibold">
                   {d.name}
@@ -97,6 +98,7 @@ const PersonDetails = () => {
                 data.original_name ||
                 "Image"
               }
+              loading="lazy"
             />
             <div className="dropDown-right flex flex-col">
               <span className="text-zinc-400 text-base sm:text-lg">
@@ -159,6 +161,7 @@ const PersonDetails = () => {
                 info.detail.original_title ||
                 "Image"
               }
+              loading="lazy"
             />
           </div>
         </div>
@@ -193,6 +196,7 @@ const PersonDetails = () => {
                   className="w-8 block bg-cover bg-center bg-no-repeat"
                   src="/imdb-icon.svg"
                   alt="imdb-logo"
+                  loading="lazy"
                 />
               </a>
             )}

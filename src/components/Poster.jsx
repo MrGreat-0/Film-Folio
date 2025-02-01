@@ -130,6 +130,7 @@ const Poster = ({ poster, title }) => {
                       p.original_title ||
                       "Image"
                     }
+                    loading="lazy"
                   />
                   <PosterDetail
                     p={p}

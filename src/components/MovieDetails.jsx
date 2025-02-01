@@ -42,6 +42,7 @@ const MovieDetails = () => {
                       : noimage
                   }
                   alt="movie-clip"
+                  loading="lazy"
                 />
               ) : (
                 <img
@@ -52,6 +53,7 @@ const MovieDetails = () => {
                       : noimage
                   }
                   alt={d.name}
+                  loading="lazy"
                 />
               )}
             </div>
@@ -115,6 +117,7 @@ const MovieDetails = () => {
                 info.detail.original_title ||
                 "Image"
               }
+              loading="lazy"
             />
           </div>
         </div>
@@ -167,6 +170,7 @@ const MovieDetails = () => {
                   className="w-8 block bg-cover bg-center bg-no-repeat"
                   src="/imdb-icon.svg"
                   alt="imdb-logo"
+                  loading="lazy"
                 />
               </a>
             )}
@@ -277,6 +281,7 @@ const MovieDetails = () => {
                         className="h-10 block bg-cover bg-center bg-no-repeat"
                         src={`https://image.tmdb.org/t/p/original/${pc.logo_path}`}
                         alt={pc.name}
+                        loading="lazy"
                       />
                       <span className="text-lg font-semibold place-self-center">
                         {pc.name}
@@ -309,6 +314,7 @@ const MovieDetails = () => {
                           className="h-10 block rounded-lg bg-cover bg-center bg-no-repeat"
                           src={`https://image.tmdb.org/t/p/original/${f.logo_path}`}
                           alt={f.provider_name}
+                          loading="lazy"
                         />
                       );
                     })
@@ -331,6 +337,7 @@ const MovieDetails = () => {
                           className="h-10 block rounded-lg bg-cover bg-center bg-no-repeat"
                           src={`https://image.tmdb.org/t/p/original/${b.logo_path}`}
                           alt={b.provider_name}
+                          loading="lazy"
                         />
                       );
                     })
@@ -355,6 +362,7 @@ const MovieDetails = () => {
                           className="h-10 block rounded-lg bg-cover bg-center bg-no-repeat"
                           src={`https://image.tmdb.org/t/p/original/${r.logo_path}`}
                           alt={r.provider_name}
+                          loading="lazy"
                         />
                       );
                     })
@@ -417,6 +425,7 @@ const MovieDetails = () => {
                               : noimage
                           }
                           alt={c.name || c.original_name}
+                          loading="lazy"
                         />
                       </div>
                       <div className="cast-name w-fit h-fit flex flex-col relative">

@@ -43,6 +43,7 @@ const Card = ({ data, title }) => {
             data.original_title ||
             "Image"
           }
+          loading="lazy"
         />
       </div>
 
