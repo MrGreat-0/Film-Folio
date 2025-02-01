@@ -7,6 +7,7 @@ const Loader = () => {
         className="w-[110px] md:w-[140px] lg:w-[170px] select-none"
         src="/Loader.gif"
         alt="loader"
+        draggable="false"
       />
     </div>
   );
