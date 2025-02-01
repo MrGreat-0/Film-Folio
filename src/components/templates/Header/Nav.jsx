@@ -176,9 +176,16 @@ const Nav = () => {
 
     return (
       <div ref={dropdownRef} className="relative py-1 cursor-pointer">
-        <h3 className="font-semibold whitespace-nowrap" onClick={handleClick}>
-          {title}
-        </h3>
+        <div className="title flex items-center relative">
+          <h3 className="font-semibold whitespace-nowrap" onClick={handleClick}>
+            {title}
+          </h3>
+          {isDropdownOpen ? (
+            <i className="ri-arrow-drop-up-fill pt-1 text-lg"></i>
+          ) : (
+            <i className="ri-arrow-drop-down-fill pt-1 text-lg"></i>
+          )}
+        </div>
         {isDropdownOpen && (
           <div
             className={`${formatToSlug(
@@ -218,7 +225,7 @@ const Nav = () => {
   return (
     <nav className="w-full h-[10vh] bg-zinc-900 px-2 flex items-center justify-between xl:justify-evenly text-white sticky top-0 left-0 z-50">
       <div className="w-auto h-12 flex gap-2 items-center relative">
-        {/* nav-hamburger menu */}
+        {/* nav-hamburger-menu for mobile */}
         <div ref={dropdownMenuRef} className="menu md:hidden relative">
           <i
             className="ri-menu-fill text-2xl cursor-pointer"
