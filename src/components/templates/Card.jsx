@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Card = ({ data, title }) => {
   // const formattedTitle = title.replace(/[-\s]+/g, "-").toLowerCase();
-  // console.log(title);
+  // console.log(data);
   return (
     <Link
       to={`/${data.media_type || title}/details/${data.id}`}
@@ -47,8 +47,10 @@ const Card = ({ data, title }) => {
         />
       </div>
 
-      {title !== "person" && (
-        <div className="card-language-info w-full min-h-[10%] bg-[#18273a] text-zinc-300 font-semibold relative px-1 py-1 flex justify-between items-center">
+      {data.media_type === "person" || title === "person" ? (
+        <></>
+      ) : (
+        <div className="card-meta-info w-full min-h-[10%] bg-[#18273a] text-zinc-300 font-semibold relative px-1 py-1 flex justify-between items-center">
           <span className="bg-[#0184ba] text-xs xs:text-sm rounded-sm px-2 uppercase whitespace-nowrap">
             {data.original_language || "No Info."}
           </span>
@@ -59,7 +61,9 @@ const Card = ({ data, title }) => {
             </span>
           ) : (
             <span className="card-vote-info bg-[#2a3f5c] text-xs xs:text-sm rounded-sm px-2 uppercase whitespace-nowrap">
-              {Math.floor(data.vote_average * 10) / 10}
+              {data.vote_average
+                ? Math.floor(data.vote_average * 10) / 10
+                : "No Info."}
             </span>
           )}
         </div>

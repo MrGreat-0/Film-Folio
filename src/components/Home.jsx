@@ -43,7 +43,7 @@ const Home = () => {
         setPoster([]);
       }
     } catch (error) {
-      console.log("Poster Error: ", error);
+      // console.log("Poster Error: ", error);
       setPoster([]);
     } finally {
       setLoading(false);
@@ -65,7 +65,7 @@ const Home = () => {
         setTrending([]);
       }
     } catch (error) {
-      console.log("Trending Error: ", error);
+      // console.log("Trending Error: ", error);
       setTrending([]);
     } finally {
       setTrendingLoading(false);
@@ -84,7 +84,7 @@ const Home = () => {
         setPopular([]);
       }
     } catch (error) {
-      console.log("Popular Error: ", error);
+      // console.log("Popular Error: ", error);
       setPopular([]);
     } finally {
       setPopularLoading(false);
@@ -103,7 +103,7 @@ const Home = () => {
         setTopRated([]);
       }
     } catch (error) {
-      console.log("Top-Rated Error: ", error);
+      // console.log("Top-Rated Error: ", error);
       setTopRated([]);
     } finally {
       setTopRatedLoading(false);

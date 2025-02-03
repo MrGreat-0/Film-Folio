@@ -2,7 +2,7 @@ import axios from "../../utils/axios";
 export { removeTV } from "../reducers/tvSlice";
 import { loadTV } from "../reducers/tvSlice";
 
-export const asyncLoadTV = (id) => async (dispatch, getState) => {
+export const asyncLoadTV = (id, navigate) => async (dispatch, getState) => {
   try {
     const detail = await axios.get(`/tv/${id}`);
     const credits = await axios.get(`/tv/${id}/credits`);
@@ -28,6 +28,9 @@ export const asyncLoadTV = (id) => async (dispatch, getState) => {
     // console.log(allData);
     dispatch(loadTV(allData));
   } catch (error) {
-    console.log("loadTV Error : ", error);
+    // console.log("loadTV Error : ", error);
+    setTimeout(() => {
+      navigate("/404", { replace: true });
+    }, 3000);
   }
 };

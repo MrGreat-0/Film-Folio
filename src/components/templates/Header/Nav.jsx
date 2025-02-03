@@ -30,8 +30,8 @@ const Nav = () => {
 
   // nav-options data for More //
   const moreNavigation = [
-    { name: "About", endpoint: "/more/about" },
-    { name: "Contact", endpoint: "more/contact" },
+    { name: "About", endpoint: "/about" },
+    { name: "Contact", endpoint: "/contact" },
   ];
 
   // Function to format category names to URL slugs //
@@ -290,7 +290,10 @@ const Nav = () => {
           )}
         </div>
 
-        <Link className="whitespace-nowrap bg-blue-600 text-sm md:text-base px-3 py-1 rounded">
+        <Link
+          to="/auth"
+          className="whitespace-nowrap bg-blue-600 text-sm md:text-base px-3 py-1 rounded"
+        >
           Sign In
         </Link>
       </div>

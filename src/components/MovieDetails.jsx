@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { asyncLoadMovie, removeMovie } from "../store/actions/movieActions";
 import Loader from "../components/Loading/Loader";
 import ContentTitle from "./templates/ContentTitle";
@@ -9,13 +9,14 @@ import noimage from "/no-image.jpg";
 
 const MovieDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { info } = useSelector((state) => state.movie);
   // console.log(info);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(asyncLoadMovie(id));
+    dispatch(asyncLoadMovie(id, navigate));
 
     return () => {
       dispatch(removeMovie());
@@ -173,6 +174,14 @@ const MovieDetails = () => {
                   loading="lazy"
                 />
               </a>
+            )}
+            {info.detail.adult && (
+              <img
+                className="w-8 block bg-cover bg-center bg-no-repeat bg-zinc-200 rounded-full"
+                src="/18-icon.jpg"
+                alt="imdb-logo"
+                loading="lazy"
+              />
             )}
           </div>
           <div className="movie-metadata relative">

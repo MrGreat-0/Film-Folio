@@ -11,7 +11,7 @@ const TvDetails = () => {
   const { id } = useParams();
 
   const { info } = useSelector((state) => state.tv);
-  console.log(info);
+  // console.log(info);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -191,6 +191,14 @@ const TvDetails = () => {
                   loading="lazy"
                 />
               </a>
+            )}
+            {info.detail.adult && (
+              <img
+                className="w-8 block bg-cover bg-center bg-no-repeat bg-zinc-200 rounded-full"
+                src="/18-icon.jpg"
+                alt="imdb-logo"
+                loading="lazy"
+              />
             )}
           </div>
           <div className="tv-metadata relative">

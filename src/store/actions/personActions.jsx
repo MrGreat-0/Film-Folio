@@ -2,7 +2,7 @@ import axios from "../../utils/axios";
 export { removePerson } from "../reducers/personSlice";
 import { loadPerson } from "../reducers/personSlice";
 
-export const asyncLoadPerson = (id) => async (dispatch, getState) => {
+export const asyncLoadPerson = (id, navigate) => async (dispatch, getState) => {
   try {
     const detail = await axios.get(`/person/${id}`);
     const combinedCredits = await axios.get(`/person/${id}/combined_credits`);
@@ -22,6 +22,9 @@ export const asyncLoadPerson = (id) => async (dispatch, getState) => {
     // console.log(allData);
     dispatch(loadPerson(allData));
   } catch (error) {
-    console.log("loadMovie Error : ", error);
+    // console.log("loadMovie Error : ", error);
+    setTimeout(() => {
+      navigate("/404", { replace: true });
+    }, 3000);
   }
 };

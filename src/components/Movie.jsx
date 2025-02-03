@@ -41,7 +41,7 @@ const Movie = () => {
         setTrending([]);
       }
     } catch (error) {
-      console.log("Trending Error: ", error);
+      // console.log("Trending Error: ", error);
       setTrending([]);
     } finally {
       setTrendingLoading(false);
@@ -60,7 +60,7 @@ const Movie = () => {
         setPopular([]);
       }
     } catch (error) {
-      console.log("Popular Error: ", error);
+      // console.log("Popular Error: ", error);
       setPopular([]);
     } finally {
       setPopularLoading(false);
@@ -80,7 +80,7 @@ const Movie = () => {
         setTopRated([]);
       }
     } catch (error) {
-      console.log("Top-Rated Error: ", error);
+      // console.log("Top-Rated Error: ", error);
       setTopRated([]);
     } finally {
       setTopRatedLoading(false);
@@ -99,7 +99,7 @@ const Movie = () => {
         setUpcoming([]);
       }
     } catch (error) {
-      console.log("Upcoming Error: ", error);
+      // console.log("Upcoming Error: ", error);
       setUpcoming([]);
     } finally {
       setUpcomingLoading(false);
@@ -118,7 +118,7 @@ const Movie = () => {
         setNowPlaying([]);
       }
     } catch (error) {
-      console.log("Now-Playing Error: ", error);
+      // console.log("Now-Playing Error: ", error);
       setNowPlaying([]);
     } finally {
       setNowPlayingLoading(false);
@@ -181,16 +181,19 @@ const Movie = () => {
       {upcomingLoading ? <ContentLoader /> : <Content cardData={upcoming} />}
 
       {/* now-playing-content */}
-      {initialLoading ? (
-        <ContentTitleLoader />
-      ) : (
-        <ContentTitle title="now playing" toggleSwitchCount={0} />
-      )}
-      {nowPlayingLoading ? (
-        <ContentLoader />
-      ) : (
-        <Content cardData={nowPlaying} />
-      )}
+      <div className="now-playing pb-10 relative">
+        {initialLoading ? (
+          <ContentTitleLoader />
+        ) : (
+          <ContentTitle title="now playing" toggleSwitchCount={0} />
+        )}
+
+        {nowPlayingLoading ? (
+          <ContentLoader />
+        ) : (
+          <Content cardData={nowPlaying}  />
+        )}
+      </div>
     </div>
   );
 };

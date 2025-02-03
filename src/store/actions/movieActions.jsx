@@ -2,7 +2,8 @@ import axios from "../../utils/axios";
 export { removeMovie } from "../reducers/movieSlice";
 import { loadMovie } from "../reducers/movieSlice";
 
-export const asyncLoadMovie = (id) => async (dispatch, getState) => {
+export const asyncLoadMovie = (id, navigate) => async (dispatch, getState) => {
+  // const navigate = useNavigate();
   try {
     const detail = await axios.get(`/movie/${id}`);
     const credits = await axios.get(`/movie/${id}/credits`);
@@ -28,6 +29,9 @@ export const asyncLoadMovie = (id) => async (dispatch, getState) => {
     // console.log(allData);
     dispatch(loadMovie(allData));
   } catch (error) {
-    console.log("loadMovie Error : ", error);
+    // console.log("loadMovie Error : ", error);
+    setTimeout(() => {
+      navigate("/404", { replace: true });
+    }, 3000);
   }
 };

@@ -200,6 +200,14 @@ const PersonDetails = () => {
                 />
               </a>
             )}
+            {info.detail.adult && (
+              <img
+                className="w-8 block bg-cover bg-center bg-no-repeat bg-zinc-200 rounded-full"
+                src="/18-icon.jpg"
+                alt="imdb-logo"
+                loading="lazy"
+              />
+            )}
           </div>
           <div className="person-metadata relative">
             <div className="metadata-wrapper font-semibold lg:flex lg:gap-5 xl:gap-8 border-b-[0.1px] border-b-zinc-600 pb-4 text-nowrap relative">

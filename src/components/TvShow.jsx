@@ -41,7 +41,7 @@ const TvShow = () => {
         setTrending([]);
       }
     } catch (error) {
-      console.log("Trending Error: ", error);
+      // console.log("Trending Error: ", error);
       setTrending([]);
     } finally {
       setTrendingLoading(false);
@@ -60,7 +60,7 @@ const TvShow = () => {
         setPopular([]);
       }
     } catch (error) {
-      console.log("Popular Error: ", error);
+      // console.log("Popular Error: ", error);
       setPopular([]);
     } finally {
       setPopularLoading(false);
@@ -80,7 +80,7 @@ const TvShow = () => {
         setTopRated([]);
       }
     } catch (error) {
-      console.log("Top-Rated Error: ", error);
+      // console.log("Top-Rated Error: ", error);
       setTopRated([]);
     } finally {
       setTopRatedLoading(false);
@@ -99,7 +99,7 @@ const TvShow = () => {
         setAiringToaday([]);
       }
     } catch (error) {
-      console.log("Airing-Toaday Error: ", error);
+      // console.log("Airing-Toaday Error: ", error);
       setAiringToaday([]);
     } finally {
       setAiringToadayLoading(false);
@@ -118,7 +118,7 @@ const TvShow = () => {
         setOnTheAir([]);
       }
     } catch (error) {
-      console.log("Now-Playing Error: ", error);
+      // console.log("Now-Playing Error: ", error);
       setOnTheAir([]);
     } finally {
       setOnTheAirLoading(false);
@@ -184,13 +184,15 @@ const TvShow = () => {
         <Content cardData={airingToaday} />
       )}
 
-      {/* on-the-air-content */}
-      {initialLoading ? (
-        <ContentTitleLoader />
-      ) : (
-        <ContentTitle title="on the air" toggleSwitchCount={0} />
-      )}
-      {onTheAirLoading ? <ContentLoader /> : <Content cardData={onTheAir} />}
+      <div className="on-the-air pb-10 relative">
+        {/* on-the-air-content */}
+        {initialLoading ? (
+          <ContentTitleLoader />
+        ) : (
+          <ContentTitle title="on the air" toggleSwitchCount={0} />
+        )}
+        {onTheAirLoading ? <ContentLoader /> : <Content cardData={onTheAir} />}
+      </div>
     </div>
   );
 };
