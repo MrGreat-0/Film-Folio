@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { asyncLoadMovie, removeMovie } from "../store/actions/movieActions";
@@ -8,6 +8,8 @@ import Content from "./templates/Content";
 import noimage from "/no-image.jpg";
 
 const MovieDetails = () => {
+  const [isExpand, setIsExpand] = useState(false);
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -148,7 +150,19 @@ const MovieDetails = () => {
           <div className="movie-overview lg:w-[95%] xl:[85%] relative">
             <h2 className="text-4xl font-semibold pb-2">Overview</h2>
             <p className="text-lg leading-snug">
-              {info.detail.overview || "No Information"}
+              {info.detail.overview
+                ? isExpand
+                  ? info.detail.overview
+                  : info.detail.overview.slice(0, 150) + "..."
+                : "No Information"}
+              {info.detail?.overview?.length > 150 && (
+                <button
+                  onClick={() => setIsExpand(!isExpand)}
+                  className="text-xs px-1 text-blue-500 hover:underline"
+                >
+                  {isExpand ? "Hide" : "Show More"}
+                </button>
+              )}
             </p>
           </div>
           <div className="movie-links border-y-[0.1px] border-y-zinc-600 lg:border-y-0 py-4 flex gap-10 my-6 justify-center lg:justify-start relative">

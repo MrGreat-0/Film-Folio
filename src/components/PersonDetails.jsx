@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { asyncLoadPerson, removePerson } from "../store/actions/personActions";
@@ -8,6 +8,8 @@ import Content from "./templates/Content";
 import noimage from "/no-image.jpg";
 
 const PersonDetails = () => {
+  const [isExpand, setIsExpand] = useState(false);
+
   const { id } = useParams();
 
   const { info } = useSelector((state) => state.person);
@@ -321,7 +323,19 @@ const PersonDetails = () => {
         <div className="person-biography lg:w-[95%] xl:[85%] mx-auto pt-5 relative">
           <h2 className="text-4xl font-semibold pb-3">Biography</h2>
           <p className="text-base xs:text-lg leading-snug">
-            {info.detail.biography || "No Information"}
+            {info.detail.biography
+              ? isExpand
+                ? info.detail.biography
+                : info.detail.biography.slice(0, 500) + "..."
+              : "No Information"}
+            {info.detail?.biography?.length > 500 && (
+              <button
+                onClick={() => setIsExpand(!isExpand)}
+                className="text-xs px-1 text-blue-500 hover:underline"
+              >
+                {isExpand ? "Hide" : "Show More"}
+              </button>
+            )}
           </p>
         </div>
 

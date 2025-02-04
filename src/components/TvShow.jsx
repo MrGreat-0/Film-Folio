@@ -154,7 +154,11 @@ const TvShow = () => {
           toggleSwitchCount={toggleSwitchCount}
         />
       )}
-      {trendingLoading ? <ContentLoader /> : <Content cardData={trending} />}
+      {trendingLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content cardData={trending} title="tv" />
+      )}
 
       {/* popular-content */}
       {initialLoading ? (
@@ -162,7 +166,11 @@ const TvShow = () => {
       ) : (
         <ContentTitle title="what's popular" toggleSwitchCount={0} />
       )}
-      {popularLoading ? <ContentLoader /> : <Content cardData={popular} />}
+      {popularLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content cardData={popular} title="tv" />
+      )}
 
       {/* top-rated-content */}
       {initialLoading ? (
@@ -170,7 +178,11 @@ const TvShow = () => {
       ) : (
         <ContentTitle title="top rated" toggleSwitchCount={0} />
       )}
-      {topRatedLoading ? <ContentLoader /> : <Content cardData={topRated} />}
+      {topRatedLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content cardData={topRated} title="tv" />
+      )}
 
       {/* airing-today-content */}
       {initialLoading ? (
@@ -181,7 +193,7 @@ const TvShow = () => {
       {airingToadayLoading ? (
         <ContentLoader />
       ) : (
-        <Content cardData={airingToaday} />
+        <Content cardData={airingToaday} title="tv" />
       )}
 
       <div className="on-the-air pb-10 relative">
@@ -191,7 +203,11 @@ const TvShow = () => {
         ) : (
           <ContentTitle title="on the air" toggleSwitchCount={0} />
         )}
-        {onTheAirLoading ? <ContentLoader /> : <Content cardData={onTheAir} />}
+        {onTheAirLoading ? (
+          <ContentLoader />
+        ) : (
+          <Content cardData={onTheAir} title="tv" />
+        )}
       </div>
     </div>
   );

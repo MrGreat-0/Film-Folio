@@ -154,7 +154,11 @@ const Movie = () => {
           toggleSwitchCount={toggleSwitchCount}
         />
       )}
-      {trendingLoading ? <ContentLoader /> : <Content cardData={trending} />}
+      {trendingLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content cardData={trending} title="movie" />
+      )}
 
       {/* popular-content */}
       {initialLoading ? (
@@ -162,7 +166,11 @@ const Movie = () => {
       ) : (
         <ContentTitle title="what's popular" toggleSwitchCount={0} />
       )}
-      {popularLoading ? <ContentLoader /> : <Content cardData={popular} />}
+      {popularLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content cardData={popular} title="movie" />
+      )}
 
       {/* top-rated-content */}
       {initialLoading ? (
@@ -170,7 +178,11 @@ const Movie = () => {
       ) : (
         <ContentTitle title="top rated" toggleSwitchCount={0} />
       )}
-      {topRatedLoading ? <ContentLoader /> : <Content cardData={topRated} />}
+      {topRatedLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content cardData={topRated} title="movie" />
+      )}
 
       {/* upcoming-content */}
       {initialLoading ? (
@@ -178,7 +190,11 @@ const Movie = () => {
       ) : (
         <ContentTitle title="upcoming" toggleSwitchCount={0} />
       )}
-      {upcomingLoading ? <ContentLoader /> : <Content cardData={upcoming} />}
+      {upcomingLoading ? (
+        <ContentLoader />
+      ) : (
+        <Content cardData={upcoming} title="movie" />
+      )}
 
       {/* now-playing-content */}
       <div className="now-playing pb-10 relative">
@@ -191,7 +207,7 @@ const Movie = () => {
         {nowPlayingLoading ? (
           <ContentLoader />
         ) : (
-          <Content cardData={nowPlaying}  />
+          <Content cardData={nowPlaying} title="movie" />
         )}
       </div>
     </div>
