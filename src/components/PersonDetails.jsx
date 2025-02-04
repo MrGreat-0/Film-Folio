@@ -135,9 +135,9 @@ const PersonDetails = () => {
                 info.detail.profile_path ||
                 info.detail.poster_path ||
                 info.detail.backdrop_path ||
-                (info.detail.known_for[0].poster_path &&
-                  info.detail.known_for &&
-                  info.detail.known_for[0]) ||
+                (info.detail.known_for &&
+                  info.detail.known_for[0] &&
+                  info.detail.known_for[0].poster_path) ||
                 (info.detail.known_for &&
                   info.detail.known_for[1] &&
                   info.detail.known_for[1].backdrop_path)
@@ -347,14 +347,22 @@ const PersonDetails = () => {
             <h3 className="font-semibold text-4xl text-nowrap pl-3 pb-5">
               Movie (Cast In)
             </h3>
-            <CastInfo data={info.movieCredits.cast} type="movie" />
+            {info?.movieCredits?.cast?.length ? (
+              <CastInfo data={info.movieCredits.cast} type="movie" />
+            ) : (
+              "No Information"
+            )}
           </div>
 
           <div className="tv-cast-in lg:w-1/2 rounded-md overflow-hidden mx-auto lg:mx-0 relative">
             <h3 className="font-semibold text-4xl text-nowrap pl-3 pb-5">
               TV (Cast In)
             </h3>
-            <CastInfo data={info.tvCredits.cast} type="tv" />
+            {info?.tvCredits?.cast?.length ? (
+              <CastInfo data={info.tvCredits.cast} type="tv" />
+            ) : (
+              "No Information"
+            )}
           </div>
         </div>
       </div>
