@@ -6,6 +6,7 @@ import Loader from "../components/Loading/Loader";
 import ContentTitle from "./templates/ContentTitle";
 import Content from "./templates/Content";
 import noimage from "/no-image.jpg";
+import Slider from "./templates/Slider";
 
 const MovieDetails = () => {
   const [isExpand, setIsExpand] = useState(false);
@@ -24,47 +25,6 @@ const MovieDetails = () => {
       dispatch(removeMovie());
     };
   }, [id]);
-
-  const MovieSlider = ({ data, src, type }) => {
-    return (
-      <div className="movie-slide w-full h-[32vh] bg-zinc-5 flex gap-6 self-center items-center px-2 select-none overflow-y-auto">
-        {data.slice(0, 20).map((d, i) => {
-          return (
-            <div
-              key={i}
-              className="h-[85%] md:h-[95%] bg-zinc-600 rounded-lg overflow-hidden flex flex-shrink-0"
-            >
-              {type === "image" ? (
-                <img
-                  className="w-full h-full block bg-cover bg-center bg-no-repeat"
-                  src={
-                    d.file_path || d.backdrop_path || d.poster_path
-                      ? `${src}${
-                          d.file_path || d.backdrop_path || d.poster_path
-                        }`
-                      : noimage
-                  }
-                  alt="movie-clip"
-                  loading="lazy"
-                />
-              ) : (
-                <img
-                  className="w-full h-full block bg-cover bg-center bg-no-repeat"
-                  src={
-                    d.key
-                      ? `https://img.youtube.com/vi/${d.key}/mqdefault.jpg`
-                      : noimage
-                  }
-                  alt={d.name}
-                  loading="lazy"
-                />
-              )}
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
 
   return info ? (
     <div className="movie-detatil-wrapper w-full min-h-[90vh] pb-10 relative">
@@ -404,10 +364,12 @@ const MovieDetails = () => {
               Photos
             </h3>
             {info.images?.length > 0 ? (
-              <MovieSlider
+              <Slider
                 data={info.images}
                 src={"https://image.tmdb.org/t/p/original/"}
                 type="image"
+                id={id}
+                category="movie"
               />
             ) : (
               <span className="text-zinc-400">No Information</span>
@@ -418,7 +380,12 @@ const MovieDetails = () => {
               Official Videos
             </h3>
             {info.videos?.length > 0 ? (
-              <MovieSlider data={info.videos} type="video" />
+              <Slider
+                data={info.videos}
+                type="video"
+                id={id}
+                category="movie"
+              />
             ) : (
               <span className="text-zinc-400">No Information</span>
             )}

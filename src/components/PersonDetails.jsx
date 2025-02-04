@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { asyncLoadPerson, removePerson } from "../store/actions/personActions";
 import Loader from "../components/Loading/Loader";
 import ContentTitle from "./templates/ContentTitle";
 import Content from "./templates/Content";
 import noimage from "/no-image.jpg";
+import Slider from "./templates/Slider";
 
 const PersonDetails = () => {
   const [isExpand, setIsExpand] = useState(false);
@@ -24,39 +25,6 @@ const PersonDetails = () => {
       dispatch(removePerson());
     };
   }, [id]);
-
-  const PersonSlider = ({ data, src, type }) => {
-    return (
-      <div className="person-slide w-full h-[32vh] bg-zinc-5 flex gap-6 self-center items-center px-2 select-none overflow-y-auto">
-        {data.slice(0, 20).map((d, i) => {
-          return (
-            <div
-              key={i}
-              className="h-[85%] md:h-[95%] bg-zinc-600 rounded-lg overflow-hidden flex flex-shrink-0"
-            >
-              <div className="season-slider-wrapper flex flex-col">
-                <img
-                  className="w-full h-full block bg-cover bg-center bg-no-repeat"
-                  src={
-                    d.file_path || d.backdrop_path || d.poster_path
-                      ? `${src}${
-                          d.file_path || d.backdrop_path || d.poster_path
-                        }`
-                      : noimage
-                  }
-                  alt={d.name}
-                  loading="lazy"
-                />
-                <span className="text-center text-xs xs:text-sm font-semibold">
-                  {d.name}
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
 
   const CastInfo = ({ data, type }) => {
     return (
@@ -346,10 +314,12 @@ const PersonDetails = () => {
               Photos
             </h3>
             {info.images?.length > 0 ? (
-              <PersonSlider
+              <Slider
                 data={info.images}
                 src={"https://image.tmdb.org/t/p/original/"}
                 type="image"
+                id={id}
+                category="person"
               />
             ) : (
               <span className="text-zinc-400">No Information</span>

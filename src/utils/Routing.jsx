@@ -9,6 +9,7 @@ import MovieDetails from "../components/MovieDetails";
 import TvDetails from "../components/TvDetails";
 import PersonDetails from "../components/PersonDetails";
 import Trailer from "../components/Trailer";
+import WatchVideo from "../components/WatchVideo";
 import NotFound from "../components/NotFound";
 import About from "../components/About";
 import Contact from "../components/Contact";
@@ -25,9 +26,11 @@ const Routing = () => {
         <Route path="/:category/:type" element={<SubMenu />} />
         <Route path="/movie/details/:id" element={<MovieDetails />}>
           <Route path="watch" element={<Trailer />} />
+          <Route path="watch/:key" element={<WatchVideo />} />
         </Route>
         <Route path="/tv/details/:id" element={<TvDetails />}>
           <Route path="watch" element={<Trailer />} />
+          <Route path="watch/:key" element={<WatchVideo />} />
         </Route>
         <Route path="/person/details/:id" element={<PersonDetails />} />
         <Route path="/about" element={<About />} />

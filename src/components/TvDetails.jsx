@@ -6,6 +6,7 @@ import Loader from "../components/Loading/Loader";
 import ContentTitle from "./templates/ContentTitle";
 import Content from "./templates/Content";
 import noimage from "/no-image.jpg";
+import Slider from "./templates/Slider";
 
 const TvDetails = () => {
   const [isExpand, setIsExpand] = useState(false);
@@ -24,65 +25,6 @@ const TvDetails = () => {
       dispatch(removeTV());
     };
   }, [id]);
-
-  const TvSlider = ({ data, src, type }) => {
-    return (
-      <div className="tv-slide w-full h-[32vh] bg-zinc-5 flex gap-6 self-center items-center px-2 select-none overflow-y-auto">
-        {data.slice(0, 20).map((d, i) => {
-          return (
-            <div
-              key={i}
-              className="h-[85%] md:h-[95%] bg-zinc-600 rounded-lg overflow-hidden flex flex-shrink-0"
-            >
-              {type === "image" ? (
-                <img
-                  className="w-full h-full block bg-cover bg-center bg-no-repeat"
-                  src={
-                    d.file_path || d.backdrop_path || d.poster_path
-                      ? `${src}${
-                          d.file_path || d.backdrop_path || d.poster_path
-                        }`
-                      : noimage
-                  }
-                  alt="tv-clip"
-                  loading="lazy"
-                />
-              ) : type === "video" ? (
-                <img
-                  className="w-full h-full block bg-cover bg-center bg-no-repeat"
-                  src={
-                    d.key
-                      ? `https://img.youtube.com/vi/${d.key}/mqdefault.jpg`
-                      : noimage
-                  }
-                  alt={d.name}
-                  loading="lazy"
-                />
-              ) : (
-                <div className="season-slider-wrapper flex flex-col">
-                  <img
-                    className="w-full h-full block bg-cover bg-center bg-no-repeat"
-                    src={
-                      d.file_path || d.backdrop_path || d.poster_path
-                        ? `${src}${
-                            d.file_path || d.backdrop_path || d.poster_path
-                          }`
-                        : noimage
-                    }
-                    alt={d.name}
-                    loading="lazy"
-                  />
-                  <span className="text-center text-xs xs:text-sm font-semibold">
-                    {d.name}
-                  </span>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
 
   return info ? (
     <div className="tv-detatil-wrapper w-full min-h-[90vh] relative">
@@ -296,10 +238,12 @@ const TvDetails = () => {
               Seasons
             </h3>
             {info.detail.seasons?.length > 0 ? (
-              <TvSlider
+              <Slider
+                id={id}
                 data={info.detail.seasons}
                 src={"https://image.tmdb.org/t/p/original/"}
                 type="season"
+                category="tv"
               />
             ) : (
               <span className="text-zinc-400">No Information</span>
@@ -462,10 +406,12 @@ const TvDetails = () => {
               Photos
             </h3>
             {info.images?.length > 0 ? (
-              <TvSlider
+              <Slider
+                id={id}
                 data={info.images}
                 src={"https://image.tmdb.org/t/p/original/"}
                 type="image"
+                category="tv"
               />
             ) : (
               <span className="text-zinc-400">No Information</span>
@@ -476,7 +422,7 @@ const TvDetails = () => {
               Official Videos
             </h3>
             {info.videos?.length > 0 ? (
-              <TvSlider data={info.videos} type="video" />
+              <Slider id={id} data={info.videos} type="video" category="tv" />
             ) : (
               <span className="text-zinc-400">No Information</span>
             )}
