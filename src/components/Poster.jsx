@@ -8,7 +8,7 @@ import "swiper/css/autoplay";
 import noimage from "/no-image.jpg";
 import posterStyle from "./Poster.module.css";
 
-const Poster = ({ poster, title }) => {
+const Poster = ({ poster }) => {
   // const formattedTitle = title.replace(" ", "-").toLowerCase();
   // console.log(poster);
   const PosterDetail = ({ p, infoStyle }) => {
@@ -52,7 +52,7 @@ const Poster = ({ poster, title }) => {
             <>
               {p.overview.slice(0, 150)}...
               <Link
-                to={`/${p.media_type || formattedTitle}/details/${p.id}`}
+                to={`/${p.media_type}/details/${p.id}`}
                 className="text-blue-400 text-base"
               >
                 more

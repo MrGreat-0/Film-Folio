@@ -133,11 +133,7 @@ const Home = () => {
 
   return (
     <div className="w-full min-h-[90vh] pt-8">
-      {loading ? (
-        <PosterLoader />
-      ) : (
-        <Poster poster={poster} title={trendingToggleType} />
-      )}
+      {loading ? <PosterLoader /> : <Poster poster={poster} />}
 
       {/* trending-content */}
       {initialLoading ? (
