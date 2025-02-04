@@ -3,7 +3,6 @@ export { removeMovie } from "../reducers/movieSlice";
 import { loadMovie } from "../reducers/movieSlice";
 
 export const asyncLoadMovie = (id, navigate) => async (dispatch, getState) => {
-  // const navigate = useNavigate();
   try {
     const detail = await axios.get(`/movie/${id}`);
     const credits = await axios.get(`/movie/${id}/credits`);

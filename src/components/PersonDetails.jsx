@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { asyncLoadPerson, removePerson } from "../store/actions/personActions";
 import Loader from "../components/Loading/Loader";
 import ContentTitle from "./templates/ContentTitle";
@@ -11,13 +11,14 @@ const PersonDetails = () => {
   const [isExpand, setIsExpand] = useState(false);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { info } = useSelector((state) => state.person);
   // console.log(info);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(asyncLoadPerson(id));
+    dispatch(asyncLoadPerson(id, navigate));
 
     return () => {
       dispatch(removePerson());

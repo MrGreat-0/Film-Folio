@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { asyncLoadTV, removeTV } from "../store/actions/tvActions";
 import Loader from "../components/Loading/Loader";
 import ContentTitle from "./templates/ContentTitle";
@@ -11,13 +11,14 @@ const TvDetails = () => {
   const [isExpand, setIsExpand] = useState(false);
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { info } = useSelector((state) => state.tv);
   // console.log(info);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(asyncLoadTV(id));
+    dispatch(asyncLoadTV(id, navigate));
 
     return () => {
       dispatch(removeTV());
