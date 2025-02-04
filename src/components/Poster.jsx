@@ -63,7 +63,7 @@ const Poster = ({ poster }) => {
           )}
         </p>
         <Link
-          to={`${title}/details/${p.id}/watch`}
+          to={`${p.media_type}/details/${p.id}/watch`}
           className="poster-trailer-btn py-1 px-2 xl:py-2 xl:px-6 rounded-lg text-zinc-100 font-semibold lg:text-lg bg-blue-500 uppercase"
         >
           <i className="ri-play-large-fill"></i> Watch Trailer
