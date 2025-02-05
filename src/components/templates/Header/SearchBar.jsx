@@ -72,16 +72,31 @@ const SearchBar = ({ containerStyle, messageStyle }) => {
 
   // nav-search-input-shortcut-key-function //
   const handleKeyDown = (event) => {
+    const activeElement = document.activeElement;
+
+    // Allow Escape key to work anywhere
     if (
-      (event.key === "s" || event.key === "S") &&
-      document.activeElement !== searchInputRef.current
+      (event.key === "Escape" || event.key === "Esc") &&
+      activeElement === searchInputRef.current
     ) {
-      event.preventDefault();
-      searchInputRef.current?.focus();
-    } else if (event.key === "Escape" || event.key === "Esc") {
       setIsDropdownOpen(false);
       setQuery("");
       searchInputRef.current?.blur();
+      return; // Exit function after handling Escape key
+    }
+
+    // Prevent "s" shortcut from triggering when typing inside input or textarea
+    if (
+      activeElement.tagName === "INPUT" ||
+      activeElement.tagName === "TEXTAREA"
+    ) {
+      return;
+    }
+
+    // Handle "s" key for search bar activation
+    if (event.key === "s" || event.key === "S") {
+      event.preventDefault();
+      searchInputRef.current?.focus();
     }
   };
 
