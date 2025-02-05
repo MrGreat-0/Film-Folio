@@ -366,7 +366,6 @@ const MovieDetails = () => {
             {info.images?.length > 0 ? (
               <Slider
                 data={info.images}
-                src={"https://image.tmdb.org/t/p/original/"}
                 type="image"
                 id={id}
                 category="movie"

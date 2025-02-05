@@ -241,7 +241,6 @@ const TvDetails = () => {
               <Slider
                 id={id}
                 data={info.detail.seasons}
-                src={"https://image.tmdb.org/t/p/original/"}
                 type="season"
                 category="tv"
               />
@@ -406,13 +405,7 @@ const TvDetails = () => {
               Photos
             </h3>
             {info.images?.length > 0 ? (
-              <Slider
-                id={id}
-                data={info.images}
-                src={"https://image.tmdb.org/t/p/original/"}
-                type="image"
-                category="tv"
-              />
+              <Slider id={id} data={info.images} type="image" category="tv" />
             ) : (
               <span className="text-zinc-400">No Information</span>
             )}
