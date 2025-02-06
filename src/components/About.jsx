@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="w-full min-h-[90vh] flex flex-col items-center justify-center px-4 py-10">
+    <div className="w-full min-h-[91vh] flex flex-col items-center justify-center px-4 py-10">
       <h1 className="text-5xl font-bold mb-6 text-center">About Filmfolio</h1>
       <p className="text-lg text-gray-600 mb-6 text-center">
         Welcome to Filmfolio, your ultimate destination for exploring an

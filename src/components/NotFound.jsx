@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <div className="not-found w-full h-[90vh] grid place-items-center select-none relative">
+    <div className="not-found w-full h-[91vh] grid place-items-center select-none relative">
       <div className="not-found-wrapper w-fit h-fit flex flex-col gap-8 text-center relative">
         <div className="404-text flex gap-4 font-black text-6xl xs:text-7xl sm:text-9xl md:text-[9rem] lg:text-[10rem] relative">
           <h1 className="text-blue-500">404</h1> <h1>Error</h1>

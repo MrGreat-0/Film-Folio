@@ -223,7 +223,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className="w-full h-[10vh] bg-zinc-900 px-2 flex items-center justify-between xl:justify-evenly text-white sticky top-0 left-0 z-50">
+    <nav className="w-full h-[9vh] bg-zinc-900 px-2 flex items-center justify-between xl:justify-evenly text-white sticky top-0 left-0 z-50">
       <div className="w-auto h-12 flex gap-2 items-center relative">
         {/* nav-hamburger-menu for mobile */}
         <div ref={dropdownMenuRef} className="menu md:hidden relative">

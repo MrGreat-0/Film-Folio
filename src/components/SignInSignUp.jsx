@@ -23,7 +23,7 @@ const SignInSignUp = () => {
   };
 
   return (
-    <div className="w-full min-h-[90vh] flex flex-col items-center justify-center px-4 py-10">
+    <div className="w-full min-h-[91vh] flex flex-col items-center justify-center px-4 py-10">
       <div className="shadow-lg shadow-zinc-400 rounded-lg p-8 w-full max-w-md transition-all duration-300">
         <h1 className="text-4xl font-bold mb-4 text-center ">
           {isSignUp ? "Sign Up" : "Sign In"}

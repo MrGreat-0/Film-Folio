@@ -91,12 +91,12 @@ const PersonDetails = () => {
   };
 
   return info ? (
-    <div className="person-detatil-wrapper w-full min-h-[90vh] relative">
+    <div className="person-detatil-wrapper w-full min-h-[91vh] relative">
       <div
         style={{
           background: `linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.7),rgba(0,0,0,0.9))`,
         }}
-        className="poster-wrapper w-full min-h-[90vh] flex items-center flex-col lg:flex-row px-2 relative"
+        className="poster-wrapper w-full min-h-[91vh] flex items-center flex-col lg:flex-row px-2 relative"
       >
         <div className="person-detail-left w-full lg:w-[35%] h-full flex lg:items-center justify-center lg:justify-end my-10 lg:my-0 relative">
           <div className="person-poster w-[75%] h-[80%] md:w-[65%] md:h-[80%] lg:w-[90%] lg:h-[90%] xl:w-[70%] xl:h-[85%] image-container inline-block rounded-lg overflow-hidden">

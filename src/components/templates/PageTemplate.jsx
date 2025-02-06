@@ -19,7 +19,7 @@ const PageTemplate = ({
   category,
 }) => {
   return (
-    <div className="w-full min-h-[90vh] relative">
+    <div className="w-full min-h-[91vh] relative">
       {loading ? (
         <TitleLoader />
       ) : (
