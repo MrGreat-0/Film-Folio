@@ -113,7 +113,9 @@ const MovieDetails = () => {
               {info.detail.overview
                 ? isExpand
                   ? info.detail.overview
-                  : info.detail.overview.slice(0, 150) + "..."
+                  : info.detail.overview.length > 150 // Only add "..." if length > 150
+                  ? info.detail.overview.slice(0, 150) + "..."
+                  : info.detail.overview
                 : "No Information"}
               {info.detail?.overview?.length > 150 && (
                 <button

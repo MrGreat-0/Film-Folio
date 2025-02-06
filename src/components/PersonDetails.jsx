@@ -295,7 +295,9 @@ const PersonDetails = () => {
             {info.detail.biography
               ? isExpand
                 ? info.detail.biography
-                : info.detail.biography.slice(0, 500) + "..."
+                : info.detail.biography.length > 150 // Only add "..." if length > 150
+                ? info.detail.biography.slice(0, 150) + "..."
+                : info.detail.biography
               : "No Information"}
             {info.detail?.biography?.length > 500 && (
               <button

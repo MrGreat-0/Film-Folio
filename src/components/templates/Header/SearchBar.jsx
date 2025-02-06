@@ -74,7 +74,7 @@ const SearchBar = ({ containerStyle, messageStyle }) => {
   const handleKeyDown = (event) => {
     const activeElement = document.activeElement;
 
-    // Allow Escape key to work anywhere
+    // Allow Escape key only when the input is focused
     if (
       (event.key === "Escape" || event.key === "Esc") &&
       activeElement === searchInputRef.current
