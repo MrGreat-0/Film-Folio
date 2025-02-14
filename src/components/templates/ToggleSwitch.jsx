@@ -20,7 +20,7 @@ const ToggleSwitch = ({ switchData, setToggle }) => {
   };
 
   return (
-    <div className="toggle-switch h-8 w-40 md:w-48 md:h-9 lg:h-10 lg:w-56 bg-zinc-800 rounded-full relative flex justify-between items-center p-2 text-zinc-100 cursor-pointer">
+    <div className="toggle-switch h-8 w-40 md:w-48 md:h-9 lg:h-10 lg:w-56 bg-zinc-800 rounded-full relative flex justify-between items-center p-2 text-zinc-100 cursor-pointer select-none">
       <div
         style={{
           transition: "left 0.4s cubic-bezier(0.88, -0.35, 0.565, 1.35)",
