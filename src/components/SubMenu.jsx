@@ -17,6 +17,7 @@ const SubMenu = () => {
 
   // for loading
   const [loading, setLoading] = useState(true);
+  const [oneTimeLoading, setOneTimeLoading] = useState(true);
 
   // for infinite scroll
   const pageRef = useRef(1);
@@ -75,6 +76,7 @@ const SubMenu = () => {
       setData([]);
     } finally {
       setLoading(false);
+      setOneTimeLoading(false);
     }
   });
 
@@ -86,7 +88,7 @@ const SubMenu = () => {
       setHasMore(true);
       setData([]);
       getData();
-      setLoading(true);
+      type === "trending" ? setOneTimeLoading(false) : setLoading(true);
     }
   };
 
@@ -112,7 +114,9 @@ const SubMenu = () => {
         fetchData={getData}
         hasMore={hasMore}
         loading={loading}
+        oneTimeLoading={oneTimeLoading}
         category={category}
+        type={type === "trending" ? "trending" : null}
       />
     </div>
   );

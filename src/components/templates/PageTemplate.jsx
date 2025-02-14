@@ -16,11 +16,25 @@ const PageTemplate = ({
   hasMore,
   toggleSwitchCount,
   loading,
+  oneTimeLoading,
   category,
+  type,
 }) => {
   return (
     <div className="w-full min-h-[91vh] relative">
-      {loading ? (
+      {type === "trending" ? (
+        oneTimeLoading ? (
+          <TitleLoader />
+        ) : (
+          <ContentTitle
+            title={title}
+            switchData={switchData}
+            setToggleTime={setToggleTime}
+            setToggleType={setToggleType}
+            toggleSwitchCount={toggleSwitchCount}
+          />
+        )
+      ) : loading ? (
         <TitleLoader />
       ) : (
         <ContentTitle
