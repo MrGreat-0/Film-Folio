@@ -25,7 +25,7 @@ const Home = () => {
   const [toggleSwitchCount, setToggleSwitchCount] = useState(1);
 
   // for loading
-  const [loading, setLoading] = useState(false);
+  const [posterLoading, setPosterLoading] = useState(false);
   const [trendingLoading, setTrendingLoading] = useState(false);
   const [popularLoading, setPopularLoading] = useState(false);
   const [topRatedLoading, setTopRatedLoading] = useState(false);
@@ -33,7 +33,7 @@ const Home = () => {
 
   // poster function to call api for poster //
   const getPoster = async () => {
-    setLoading(true);
+    setPosterLoading(true);
     try {
       const { data } = await axios.get("/trending/all/day");
       if (data && data.results) {
@@ -46,7 +46,7 @@ const Home = () => {
       // console.log("Poster Error: ", error);
       setPoster([]);
     } finally {
-      setLoading(false);
+      setPosterLoading(false);
       setInitialLoading(false);
     }
   };
@@ -133,7 +133,7 @@ const Home = () => {
 
   return (
     <div className="w-full min-h-[91vh] pt-8">
-      {loading ? <PosterLoader /> : <Poster poster={poster} />}
+      {posterLoading ? <PosterLoader /> : <Poster poster={poster} />}
 
       {/* trending-content */}
       {initialLoading ? (
